@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import 'Add_Subject_2.dart';
 import 'Background.dart';
-import 'DashBoard_Screen.dart';
 
 
 class Add_Subject_1 extends StatefulWidget {

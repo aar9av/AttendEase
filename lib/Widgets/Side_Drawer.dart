@@ -1,7 +1,6 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
-//import 'package:image_picker/image_picker.dart';
 
 import 'Background.dart';
 import 'Login_Screen.dart';
@@ -16,10 +15,6 @@ class Side_Drawer extends StatefulWidget {
 
 
 class _Side_DrawerState extends State<Side_Drawer> {
-
-  //final ImagePicker _picker = ImagePicker();
-
-  //XFile? profilePicture;
 
   @override
   Widget build(BuildContext context) {
@@ -41,40 +36,30 @@ class _Side_DrawerState extends State<Side_Drawer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 200,
+              height: 240,
               width: double.infinity,
               padding: const EdgeInsets.all(5),
-              child: DrawerHeader(
+              child: const DrawerHeader(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    RawMaterialButton(
-                      onPressed: () async{
-                        //final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
-                        //setState(() {
-                          //profilePicture = photo;
-                        //});
-                      },
-                      // child: CircleAvatar(
-                      //   radius: 40,
-                      //   backgroundImage: (profilePicture==null)?
-                      //     const AssetImage("Assets/Images/Profile.png"):
-                      //     AssetImage(profilePicture!.path),
-                      // ),
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: AssetImage("Assets/Images/Profile.png"),
                     ),
-                    const Text(
+                    Text(
                       'Username',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 24,
+                        fontSize: 30,
                       ),
                     ),
-                    const Text(
+                    Text(
                       'abc@gmail.com',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                     ),
                   ],
@@ -82,7 +67,7 @@ class _Side_DrawerState extends State<Side_Drawer> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).size.height-230,
+              height: MediaQuery.of(context).size.height-260,
               child: Stack(
                 children: [
                   const Background(),
