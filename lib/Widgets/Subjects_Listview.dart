@@ -125,7 +125,7 @@ class _Subjects_ListviewState extends State<Subjects_Listview> {
                           ),
                         );
                       } else{
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => const Edit_Subject_1()),
                         );
@@ -144,15 +144,27 @@ class _Subjects_ListviewState extends State<Subjects_Listview> {
                             );
                           },
                           child: ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.book,
                               size: 40,
+                              color: Colors.black.withAlpha(150),
                             ),
-                            title: Text(subject[index]),
-                            subtitle: Text(subjectCoordinator[index]),
+                            title: Text(
+                              subject[index],
+                              style: TextStyle(
+                                color: Colors.black.withAlpha(200),
+                              ),
+                            ),
+                            subtitle: Text(
+                              subjectCoordinator[index],
+                              style: TextStyle(
+                                color: Colors.black.withAlpha(200),
+                              ),
+                            ),
                             trailing: Text(
                               '${percentage[index]}%',
-                              style: const TextStyle(
+                              style: TextStyle(
+                                color: Colors.black.withAlpha(150),
                                 fontSize: 30,
                               ),
                             ),

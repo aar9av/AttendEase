@@ -76,7 +76,7 @@ class _Side_DrawerState extends State<Side_Drawer> {
                         color: Colors.white,
                         fontSize: 12,
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -87,17 +87,17 @@ class _Side_DrawerState extends State<Side_Drawer> {
                 children: [
                   const Background(),
                   SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextButton(
-                          onPressed: (){
-
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: Row(
-                              children: const [
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          TextButton(
+                            onPressed: (){
+                      
+                            },
+                            child: const Row(
+                              children: [
                                 Icon(
                                   Icons.person,
                                   size: 30,
@@ -114,15 +114,12 @@ class _Side_DrawerState extends State<Side_Drawer> {
                               ],
                             ),
                           ),
-                        ),
-                        TextButton(
-                          onPressed: (){
-
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: Row(
-                              children: const [
+                          TextButton(
+                            onPressed: (){
+                      
+                            },
+                            child: const Row(
+                              children: [
                                 Icon(
                                   Icons.settings,
                                   size: 30,
@@ -139,16 +136,15 @@ class _Side_DrawerState extends State<Side_Drawer> {
                               ],
                             ),
                           ),
-                        ),
-                        const Divider(),
-                        TextButton(
-                          onPressed: (){
-
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: Row(
-                              children: const [
+                          const Divider(
+                            color: Colors.grey,
+                          ),
+                          TextButton(
+                            onPressed: (){
+                      
+                            },
+                            child: const Row(
+                              children: [
                                 Icon(
                                   Icons.star,
                                   size: 30,
@@ -165,15 +161,12 @@ class _Side_DrawerState extends State<Side_Drawer> {
                               ],
                             ),
                           ),
-                        ),
-                        TextButton(
-                          onPressed: (){
-
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: Row(
-                              children: const [
+                          TextButton(
+                            onPressed: (){
+                      
+                            },
+                            child: const Row(
+                              children: [
                                 Icon(
                                   Icons.contact_mail,
                                   size: 30,
@@ -190,15 +183,12 @@ class _Side_DrawerState extends State<Side_Drawer> {
                               ],
                             ),
                           ),
-                        ),
-                        TextButton(
-                          onPressed: (){
-
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: Row(
-                              children: const [
+                          TextButton(
+                            onPressed: (){
+                      
+                            },
+                            child: const Row(
+                              children: [
                                 Icon(
                                   Icons.share,
                                   size: 30,
@@ -215,19 +205,18 @@ class _Side_DrawerState extends State<Side_Drawer> {
                               ],
                             ),
                           ),
-                        ),
-                        const Divider(),
-                        TextButton(
-                          onPressed: (){
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => const Login_Screen()),
-                            );
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            child: Row(
-                              children: const [
+                          const Divider(
+                            color: Colors.grey,
+                          ),
+                          TextButton(
+                            onPressed: (){
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const Login_Screen()),
+                              );
+                            },
+                            child: const Row(
+                              children: [
                                 Icon(
                                   Icons.power_settings_new,
                                   size: 30,
@@ -244,8 +233,8 @@ class _Side_DrawerState extends State<Side_Drawer> {
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   )
                 ],

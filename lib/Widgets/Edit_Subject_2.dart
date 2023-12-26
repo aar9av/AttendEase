@@ -16,14 +16,15 @@ class Edit_Subject_2 extends StatefulWidget {
 class _Edit_Subject_2State extends State<Edit_Subject_2> {
   bool isCheckedAllDays = false;
   bool isCheckedSameTime = false;
+  List<String> time = ["1", "2", "3", "4", "5", "6", "7"];
+  List<String> days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
 
   @override
   Widget build(BuildContext context) {
-    List<String> days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
 
     Color getColor(Set<MaterialState> states) {
-      return Theme.of(context).primaryColor;
+      return Colors.white;
     }
 
     return Scaffold(
@@ -195,7 +196,7 @@ class _Edit_Subject_2State extends State<Edit_Subject_2> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Checkbox(
-                            checkColor: Colors.white,
+                            checkColor: Theme.of(context).primaryColor,
                             fillColor: MaterialStateProperty.resolveWith(getColor),
                             value: isCheckedAllDays,
                             onChanged: (bool? value) {
@@ -212,12 +213,14 @@ class _Edit_Subject_2State extends State<Edit_Subject_2> {
                           ),
                         ],
                       ),
-                      const Divider(),
+                      const Divider(
+                        color: Colors.grey,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Checkbox(
-                            checkColor: Colors.white,
+                            checkColor: Theme.of(context).primaryColor,
                             fillColor: MaterialStateProperty.resolveWith(getColor),
                             value: isCheckedSameTime,
                             onChanged: (bool? value) {
@@ -291,7 +294,7 @@ class _Edit_Subject_2State extends State<Edit_Subject_2> {
                             );
                           },
                           child: const Text(
-                            'Save',
+                            'Edit Subject',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,

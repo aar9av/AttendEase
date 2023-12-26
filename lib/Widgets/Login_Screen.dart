@@ -105,7 +105,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.email),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50)
+                            borderRadius: BorderRadius.circular(50),
                         ),
                         labelText: 'Email/Mobile Number',
                         errorText: validateUsername ? null : "Invalid Email or Mobile Number",

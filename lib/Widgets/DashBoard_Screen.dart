@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 
 import 'Add_Subject_1.dart';
@@ -16,16 +18,19 @@ class DashBoard_Screen extends StatelessWidget {
           child: Side_Drawer(),
         ),
         appBar: AppBar(
-          title: const Text('Hi! User'),
+          title: const Text(
+            'Hi! User',
+          ),
         ),
         body: const Subjects_Listview(),
         floatingActionButton: FloatingActionButton(
           onPressed: (){
-            Navigator.pushReplacement(
+            Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Add_Subject_1())
             );
           },
+          backgroundColor: Theme.of(context).primaryColor,
           tooltip: 'Add Subject',
           child: const Icon(Icons.add),
         ),

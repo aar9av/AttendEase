@@ -51,7 +51,7 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
@@ -64,7 +64,7 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
@@ -77,7 +77,7 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
@@ -89,7 +89,12 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                           labelText: 'Subject Coordinator',
                         ),
                       ),
-                      const Divider(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Divider(
+                        color: Colors.grey,
+                      ),
                       Container(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -112,7 +117,9 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                           });
                         },
                       ),
-                      const Divider(),
+                      const Divider(
+                        color: Colors.grey,
+                      ),
                       Container(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -124,7 +131,7 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
@@ -137,7 +144,7 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 40,
                       ),
                       Container(
                         width: double.infinity,
@@ -164,7 +171,7 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Container(
                         width: double.infinity,
@@ -175,10 +182,7 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                         ),
                         child: TextButton(
                           onPressed: (){
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => const DashBoard_Screen())
-                            );
+                            Navigator.pop(context);
                           },
                           child: const Text(
                             'Cancel',

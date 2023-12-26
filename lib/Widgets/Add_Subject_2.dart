@@ -3,7 +3,6 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
-import 'Add_Subject_1.dart';
 import 'Background.dart';
 import 'DashBoard_Screen.dart';
 
@@ -25,7 +24,7 @@ class _Add_Subject_2State extends State<Add_Subject_2> {
   Widget build(BuildContext context) {
 
     Color getColor(Set<MaterialState> states) {
-      return Theme.of(context).primaryColor;
+      return Colors.white;
     }
 
     return Scaffold(
@@ -197,7 +196,7 @@ class _Add_Subject_2State extends State<Add_Subject_2> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Checkbox(
-                            checkColor: Colors.white,
+                            checkColor: Theme.of(context).primaryColor,
                             fillColor: MaterialStateProperty.resolveWith(getColor),
                             value: isCheckedAllDays,
                             onChanged: (bool? value) {
@@ -214,12 +213,14 @@ class _Add_Subject_2State extends State<Add_Subject_2> {
                           ),
                         ],
                       ),
-                      const Divider(),
+                      const Divider(
+                        color: Colors.grey,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Checkbox(
-                            checkColor: Colors.white,
+                            checkColor: Theme.of(context).primaryColor,
                             fillColor: MaterialStateProperty.resolveWith(getColor),
                             value: isCheckedSameTime,
                             onChanged: (bool? value) {
