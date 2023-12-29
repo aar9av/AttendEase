@@ -1,20 +1,17 @@
-// ignore_for_file: camel_case_types
-
+import 'package:attend_easy/Functionalities/Authentication/SignOut.dart';
 import 'package:flutter/material.dart';
-
-import 'Background.dart';
-import 'Login_Screen.dart';
+import '../Background.dart';
 
 
-class Side_Drawer extends StatefulWidget {
-  const Side_Drawer({super.key});
+class SideDrawer extends StatefulWidget {
+  const SideDrawer({super.key});
 
   @override
-  State<Side_Drawer> createState() => _Side_DrawerState();
+  State<SideDrawer> createState() => _SideDrawerState();
 }
 
 
-class _Side_DrawerState extends State<Side_Drawer> {
+class _SideDrawerState extends State<SideDrawer> {
 
   @override
   Widget build(BuildContext context) {
@@ -194,11 +191,9 @@ class _Side_DrawerState extends State<Side_Drawer> {
                             color: Colors.grey,
                           ),
                           TextButton(
-                            onPressed: (){
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => const Login_Screen()),
-                              );
+                            onPressed: () async{
+                              SignOut().signOutEmail(context);
+                              SignOut().signOutGoogle(context);
                             },
                             child: const Row(
                               children: [

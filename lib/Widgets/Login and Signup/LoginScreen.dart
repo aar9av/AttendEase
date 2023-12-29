@@ -1,25 +1,21 @@
-// ignore_for_file: camel_case_types
-
-import 'package:flutter/material.dart';
+import 'package:attend_easy/Widgets/Login%20and%20Signup/SignUpScreen.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../Functionalities/Authentication/LoginWithEmail.dart';
+import '../../Functionalities/Authentication/LoginWithGoogle.dart';
+import '../Background.dart';
+import 'HeadingBackground.dart';
 
-import 'Signup_Screen_1.dart';
-import 'Background.dart';
-import 'DashBoard_Screen.dart';
-
-
-
-class Login_Screen extends StatefulWidget {
-  const Login_Screen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<Login_Screen> createState() => _Login_ScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _Login_ScreenState extends State<Login_Screen> {
-
-  final emailOrMobile = TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
+  final email = TextEditingController();
   final password = TextEditingController();
   bool passwordVisible = true;
   bool validateUsername = true;
@@ -40,48 +36,18 @@ class _Login_ScreenState extends State<Login_Screen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    emailOrMobile.dispose();
+    email.dispose();
     password.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Stack(
         children: [
           const Background(),
-          Container(
-            height: 250,
-            width: 300,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(200),
-                topRight: Radius.circular(50),
-                bottomLeft: Radius.circular(100),
-              ),
-              gradient: LinearGradient(
-                begin: AlignmentDirectional.topCenter,
-                end: AlignmentDirectional.bottomCenter,
-                colors: [
-                  Theme.of(context).primaryColor.withAlpha(150),
-                  Theme.of(context).primaryColor
-                ],
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(30),
-            child: const Text(
-              'Already\nHave An\nAccount?',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-              ),
-            ),
-          ),
+          const HeadingBackground(heading: 'Already\nHave An\nAccount?',),
           Center(
             child: BlurryContainer(
               height: 450,
@@ -101,18 +67,15 @@ class _Login_ScreenState extends State<Login_Screen> {
                     ),
                     TextField(
                       keyboardType: TextInputType.emailAddress,
-                      controller: emailOrMobile,
+                      controller: email,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.email),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
+                          borderRadius: BorderRadius.circular(50),
                         ),
-                        labelText: 'Email/Mobile Number',
-                        errorText: validateUsername ? null : "Invalid Email or Mobile Number",
+                        labelText: 'Enter Username',
+                        errorText: validateUsername ? null : "Invalid Username",
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
                     ),
                     TextField(
                       keyboardType: TextInputType.visiblePassword,
@@ -129,15 +92,14 @@ class _Login_ScreenState extends State<Login_Screen> {
                           icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
                           onPressed: () {
                             setState(() {
-                                passwordVisible = !passwordVisible;
-                              },
-                            );
+                              passwordVisible = !passwordVisible;
+                            },);
                           },
                         ),
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Container(
                       width: double.infinity,
@@ -147,39 +109,30 @@ class _Login_ScreenState extends State<Login_Screen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: TextButton(
-                          onPressed: (){
-                            setState(() {
-                              validateUsername =
-                              emailOrMobile.text.isNotEmpty &&
-                                  ( emailOrMobile.text.length == 10 ||
-                                      emailOrMobile.text.contains('@'));
-                              validatePassword = password.text.length>=8;
-                            });
-                            if(validateUsername && validatePassword) {
-                              print(emailOrMobile);
-                              print(password);
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (
-                                      context) => const DashBoard_Screen())
-                              );
-                            }
-                          },
-                          child: const Text(
-                            'Login',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        onPressed: (){
+                          setState(() {
+                            validateUsername = email.text.contains('@');
+                            validatePassword = password.text.length>=8;
+                          });
+                          if(validateUsername && validatePassword) {
+                            LoginWithEmail(email: email.text, password: password.text).loginWithEmail(context);
+                          }
+                        },
+                        child: const Text(
+                          'Login',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
+                        ),
                       ),
                     ),
                     TextButton(
                       onPressed: (){
                         Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => const Signup_Screen_1())
+                            context,
+                            MaterialPageRoute(builder: (context) => const SignUpScreen()),
                         );
                       },
                       child: Text(
@@ -191,11 +144,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                         ),
                       ),
                     ),
-                    const Center(
-                        child: Text(
-                            'or login with'
-                        ),
-                    ),
+                    const Text('or login with'),
                     Container(
                       width: double.infinity,
                       height: 40,
@@ -205,7 +154,7 @@ class _Login_ScreenState extends State<Login_Screen> {
                       ),
                       child: IconButton(
                         onPressed: (){
-
+                          LoginWithGoogle().loginWithGoogle(context);
                         },
                         icon: Image.asset("Assets/Images/Google.jpg"),
                       ),

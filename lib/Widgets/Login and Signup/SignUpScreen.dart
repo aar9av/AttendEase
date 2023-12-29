@@ -1,31 +1,30 @@
-// ignore_for_file: camel_case_types
-
-import 'package:flutter/material.dart';
+import 'package:attend_easy/Widgets/Background.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'DashBoard_Screen.dart';
-import 'Login_Screen.dart';
-import 'Background.dart';
+import '../../Functionalities/Authentication/SignupUser.dart';
+import 'HeadingBackground.dart';
+import 'LoginScreen.dart';
 
-class Signup_Screen_2 extends StatefulWidget {
-  const Signup_Screen_2({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<Signup_Screen_2> createState() => _Signup_Screen_2State();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _Signup_Screen_2State extends State<Signup_Screen_2> {
-
-  final mobileNumber = TextEditingController();
+class _SignUpScreenState extends State<SignUpScreen> {
+  final name = TextEditingController();
+  final email = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
   bool passwordVisible = true;
   bool confirmPasswordVisible = true;
-  bool validateMobile = true;
+  bool validateName = true;
+  bool validateEmail = true;
   bool validatePasswordLength = true;
   bool validatePassword = true;
-
 
   @override
   void initState() {
@@ -42,52 +41,24 @@ class _Signup_Screen_2State extends State<Signup_Screen_2> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    mobileNumber.dispose();
+    name.dispose();
+    email.dispose();
     password.dispose();
     confirmPassword.dispose();
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Stack(
         children: [
           const Background(),
-          Container(
-            height: 250,
-            width: 300,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(200),
-                topRight: Radius.circular(50),
-                bottomLeft: Radius.circular(100),
-              ),
-              gradient: LinearGradient(
-                begin: AlignmentDirectional.topCenter,
-                end: AlignmentDirectional.bottomCenter,
-                colors: [
-                  Theme.of(context).primaryColor.withAlpha(150),
-                  Theme.of(context).primaryColor
-                ],
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(30),
-            child: const Text(
-              'Here is your\nfirst step\nwith us!',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
-              ),
-            ),
-          ),
+          const HeadingBackground(heading: 'Here is your\nfirst step\nwith us!',),
           Center(
             child: BlurryContainer(
-              height: 450,
+              height: 480,
               width: 300,
               blur: 5,
               color: Colors.transparent.withOpacity(0.05),
@@ -99,20 +70,32 @@ class _Signup_Screen_2State extends State<Signup_Screen_2> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
                     TextField(
-                      keyboardType: TextInputType.phone,
-                      controller: mobileNumber,
+                      keyboardType: TextInputType.text,
+                      controller: name,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.phone),
+                        prefixIcon: const Icon(Icons.person),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50)
                         ),
-                        labelText: 'Mobile Number',
-                        errorText: validateMobile ? null : "Invalid Mobile Number",
+                        labelText: 'Enter Full Name',
+                        errorText: validateName ? null : "Name Can't be empty",
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
+                    TextField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: email,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.mail),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50)
+                        ),
+                        labelText: 'Enter Email',
+                        errorText: validateEmail ? null : "Invalid Email",
+                      ),
                     ),
                     TextField(
                       keyboardType: TextInputType.visiblePassword,
@@ -135,9 +118,6 @@ class _Signup_Screen_2State extends State<Signup_Screen_2> {
                           },
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 5,
                     ),
                     TextField(
                       keyboardType: TextInputType.visiblePassword,
@@ -174,17 +154,17 @@ class _Signup_Screen_2State extends State<Signup_Screen_2> {
                       child: TextButton(
                         onPressed: (){
                           setState(() {
-                            validateMobile = mobileNumber.text.length == 10;
+                            validateName = name.text.isNotEmpty;
+                            validateEmail = email.text.contains('@');
                             validatePasswordLength = password.text.length >= 8;
-                            validatePassword = password == confirmPassword;
+                            validatePassword = password.text == confirmPassword.text;
                           });
-                          if(validateMobile && validatePassword && validatePasswordLength) {
-                            Navigator.pop(context);
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (
-                                    context) => const DashBoard_Screen())
-                            );
+                          if(validateEmail && validatePassword && validatePasswordLength) {
+                            SignupUser(
+                              name: name.text,
+                              email: email.text,
+                              password: password.text,
+                            ).signupUser(context);
                           }
                         },
                         child: const Text(
@@ -201,7 +181,7 @@ class _Signup_Screen_2State extends State<Signup_Screen_2> {
                       onPressed: (){
                         Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const Login_Screen())
+                            MaterialPageRoute(builder: (context) => const LoginScreen())
                         );
                       },
                       child: Text(
@@ -213,35 +193,13 @@ class _Signup_Screen_2State extends State<Signup_Screen_2> {
                         ),
                       ),
                     ),
-                    const Center(
-                      child: Text(
-                          'or register with'
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: IconButton(
-                        onPressed: (){
-
-                        },
-                        icon: Image.asset("Assets/Images/Google.jpg"),
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
           )
         ],
-      ),
+      )
     );
   }
 }

@@ -1,22 +1,19 @@
-// ignore_for_file: camel_case_types
-
+import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/EditSubject1.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-
-import 'DashBoard_Screen.dart';
-import 'Background.dart';
-import 'Edit_Subject_1.dart';
-import 'Subject_Panel.dart';
+import 'DashBoardScreen.dart';
+import '../Background.dart';
+import 'SubjectPanel.dart';
 
 
-class Subjects_Listview extends StatefulWidget {
-  const Subjects_Listview({super.key});
+class SubjectsListview extends StatefulWidget {
+  const SubjectsListview({super.key});
 
   @override
-  State<Subjects_Listview> createState() => _Subjects_ListviewState();
+  State<SubjectsListview> createState() => _SubjectsListviewState();
 }
 
-class _Subjects_ListviewState extends State<Subjects_Listview> {
+class _SubjectsListviewState extends State<SubjectsListview> {
   @override
   Widget build(BuildContext context) {
     List<String> subject = ["Subject 1", "Subject 2", "Subject 3", "Subject 4", "Subject 5", "Subject 6", "Subject 7", "Subject 8", "Subject 9", "Subject 10", "Subject 11", "Subject 12"];
@@ -76,7 +73,7 @@ class _Subjects_ListviewState extends State<Subjects_Listview> {
                                 onPressed: (){
                                   Navigator.pushReplacement(
                                       context,
-                                      MaterialPageRoute(builder: (context) => const DashBoard_Screen())
+                                      MaterialPageRoute(builder: (context) => const DashBoardScreen())
                                   );
                                 },
                                 child: const Text('Cancel'),
@@ -111,7 +108,7 @@ class _Subjects_ListviewState extends State<Subjects_Listview> {
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                   Navigator.pushReplacement(
-                                      context, MaterialPageRoute(builder: (context) => const DashBoard_Screen())
+                                      context, MaterialPageRoute(builder: (context) => const DashBoardScreen())
                                   );
                                 },
                                 child: const Text(
@@ -127,7 +124,7 @@ class _Subjects_ListviewState extends State<Subjects_Listview> {
                       } else{
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const Edit_Subject_1()),
+                          MaterialPageRoute(builder: (context) => const EditSubject1()),
                         );
                       }
                     },
@@ -140,7 +137,7 @@ class _Subjects_ListviewState extends State<Subjects_Listview> {
                           onPressed: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const Subject_Panel()),
+                              MaterialPageRoute(builder: (context) => const SubjectPanel()),
                             );
                           },
                           child: ListTile(

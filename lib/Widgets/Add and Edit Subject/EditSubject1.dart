@@ -1,20 +1,17 @@
-// ignore_for_file: camel_case_types
-
+import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/EditSubject2.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-
-import 'Background.dart';
-import 'Edit_Subject_2.dart';
+import '../Background.dart';
 
 
-class Edit_Subject_1 extends StatefulWidget {
-  const Edit_Subject_1({super.key});
+class EditSubject1 extends StatefulWidget {
+  const EditSubject1({super.key});
 
   @override
-  State<Edit_Subject_1> createState() => _Edit_Subject_1State();
+  State<EditSubject1> createState() => _EditSubject1State();
 }
 
-class _Edit_Subject_1State extends State<Edit_Subject_1> {
+class _EditSubject1State extends State<EditSubject1> {
   double minAttendancePercent = 75;
 
   @override
@@ -156,7 +153,7 @@ class _Edit_Subject_1State extends State<Edit_Subject_1> {
                           onPressed: (){
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const Edit_Subject_2())
+                                MaterialPageRoute(builder: (context) => const EditSubject2())
                             );
                           },
                           child: const Text(

@@ -1,20 +1,17 @@
-// ignore_for_file: camel_case_types
-
+import 'package:attend_easy/Widgets/Background.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import 'Background.dart';
 
-
-class Subject_Panel extends StatefulWidget {
-  const Subject_Panel({super.key});
+class SubjectPanel extends StatefulWidget {
+  const SubjectPanel({super.key});
 
   @override
-  State<Subject_Panel> createState() => _Subject_PanelState();
+  State<SubjectPanel> createState() => _SubjectPanelState();
 }
 
-class _Subject_PanelState extends State<Subject_Panel> {
+class _SubjectPanelState extends State<SubjectPanel> {
   List<String> date = ["Mon, 12 Nov", "Wed, 14 Nov", "Fri, 16 Nov", "Sun, 18 Nov", "Tue, 20 Nov", "Thu, 22 Nov", "Sat, 24 Nov", "Mon, 26 Nov", "Wed, 28 Nov", "Fri, 30 Nov"];
   List<String> attendance = ["Present", "Present", "Absent", "Present", "Present", "Absent", "Present", "Present", "Absent", "Present", "Present", "Absent", "Present", "Present", "Absent", "Present", "Present", "Absent", "Present", "Present"];
   DateTime today = DateTime.now();

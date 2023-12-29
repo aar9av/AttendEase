@@ -1,13 +1,15 @@
-// ignore_for_file: camel_case_types
-
+import 'package:attend_easy/Widgets/Login%20and%20Signup/LoginScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'Widgets/Login_Screen.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const AttendEase());
+}
 
-void main() => runApp(const attend_easy());
-
-class attend_easy extends StatelessWidget {
-  const attend_easy({super.key});
+class AttendEase extends StatelessWidget {
+  const AttendEase({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +36,13 @@ class attend_easy extends StatelessWidget {
           )
         ),
       ),
-      home: const Login_Screen(),
+      home: const LoginScreen(),
+      // StreamBuilder(
+      //   stream: FirebaseAuth.instance.authStateChanges(),
+      //   builder: (context, snapshot){
+      //     return (snapshot.hasData)?const DashBoardScreen():const LoginScreen();
+      //   },
+      // ),
     );
   }
 }

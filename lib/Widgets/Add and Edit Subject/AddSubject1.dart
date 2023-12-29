@@ -1,20 +1,18 @@
-// ignore_for_file: camel_case_types
-
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
-import 'Add_Subject_2.dart';
-import 'Background.dart';
+import 'AddSubject2.dart';
+import '../Background.dart';
 
 
-class Add_Subject_1 extends StatefulWidget {
-  const Add_Subject_1({super.key});
+class AddSubject1 extends StatefulWidget {
+  const AddSubject1({super.key});
 
   @override
-  State<Add_Subject_1> createState() => _Add_Subject_1State();
+  State<AddSubject1> createState() => _AddSubject1State();
 }
 
-class _Add_Subject_1State extends State<Add_Subject_1> {
+class _AddSubject1State extends State<AddSubject1> {
   double minAttendancePercent = 75;
 
   @override
@@ -156,7 +154,7 @@ class _Add_Subject_1State extends State<Add_Subject_1> {
                           onPressed: (){
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const Add_Subject_2())
+                                MaterialPageRoute(builder: (context) => const AddSubject2())
                             );
                           },
                           child: const Text(

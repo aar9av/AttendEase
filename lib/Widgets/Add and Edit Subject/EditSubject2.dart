@@ -1,19 +1,18 @@
-// ignore_for_file: camel_case_types
-
+import 'package:attend_easy/Widgets/Background.dart';
+import 'package:attend_easy/Widgets/Dashboard/DashBoardScreen.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
-import 'Background.dart';
-import 'DashBoard_Screen.dart';
 
-class Edit_Subject_2 extends StatefulWidget {
-  const Edit_Subject_2({super.key});
+
+class EditSubject2 extends StatefulWidget {
+  const EditSubject2({super.key});
 
   @override
-  State<Edit_Subject_2> createState() => _Edit_Subject_2State();
+  State<EditSubject2> createState() => _EditSubject2State();
 }
 
-class _Edit_Subject_2State extends State<Edit_Subject_2> {
+class _EditSubject2State extends State<EditSubject2> {
   bool isCheckedAllDays = false;
   bool isCheckedSameTime = false;
   List<String> time = ["1", "2", "3", "4", "5", "6", "7"];
@@ -290,7 +289,7 @@ class _Edit_Subject_2State extends State<Edit_Subject_2> {
                             Navigator.pop(context);
                             Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(builder: (context) => const DashBoard_Screen())
+                                MaterialPageRoute(builder: (context) => const DashBoardScreen())
                             );
                           },
                           child: const Text(
