@@ -12,7 +12,12 @@
           "package_name": "com.example.attend_easy"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "570505786746-2afu8c0ourrg621bdjooi6mn4geh3fco.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCxBepk7WfA4MjhsqIb0qTLsBKIvaAb1pI"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "570505786746-2afu8c0ourrg621bdjooi6mn4geh3fco.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "570505786746-4ti53ueubaeij04b4nu2kkrd1ldv539h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.attendEasy"
+              }
+            }
+          ]
         }
       }
     }

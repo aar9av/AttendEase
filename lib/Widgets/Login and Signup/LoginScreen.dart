@@ -46,7 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          const Background(),
           const HeadingBackground(heading: 'Already\nHave An\nAccount?',),
           Center(
             child: BlurryContainer(

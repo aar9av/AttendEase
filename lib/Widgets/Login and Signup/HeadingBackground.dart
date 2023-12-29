@@ -1,3 +1,4 @@
+import 'package:attend_easy/Widgets/Background.dart';
 import 'package:flutter/material.dart';
 
 class HeadingBackground extends StatelessWidget {
@@ -12,6 +13,7 @@ class HeadingBackground extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          const Background(),
           Container(
             height: 250,
             width: 300,

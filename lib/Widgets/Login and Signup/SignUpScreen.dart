@@ -54,7 +54,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          const Background(),
           const HeadingBackground(heading: 'Here is your\nfirst step\nwith us!',),
           Center(
             child: BlurryContainer(
