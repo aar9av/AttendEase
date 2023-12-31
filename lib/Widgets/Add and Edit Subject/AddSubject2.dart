@@ -1,11 +1,24 @@
-import 'package:attend_easy/Widgets/Dashboard/DashBoardScreen.dart';
+import 'package:attend_easy/Functionalities/Add%20Data/Add%20Subject.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import '../Background.dart';
 
 
 class AddSubject2 extends StatefulWidget {
-  const AddSubject2({super.key});
+  final subjectName;
+  final subjectCode;
+  final subjectCoordinator;
+  final minAttendancePercent;
+  final subjectLocation;
+
+  const AddSubject2({
+    Key? key,
+    required this.subjectName,
+    required this.subjectCode,
+    required this.subjectCoordinator,
+    required this.minAttendancePercent,
+    required this.subjectLocation,
+  }) : super(key: key);
 
   @override
   State<AddSubject2> createState() => _AddSubject2State();
@@ -77,7 +90,7 @@ class _AddSubject2State extends State<AddSubject2> {
                               title: Text(
                                 days[index],
                                 style: const TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 16,
                                 ),
                               ),
                               trailing: Container(
@@ -101,7 +114,7 @@ class _AddSubject2State extends State<AddSubject2> {
                                   child: Text(
                                     "${time[index].hour}:${time[index].minute}",
                                     style: const TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 16,
                                       color: Colors.black,
                                     ),
                                   ),
@@ -123,10 +136,13 @@ class _AddSubject2State extends State<AddSubject2> {
                         ),
                         child: TextButton(
                           onPressed: (){
-                            Navigator.pop(context);
-                            Navigator.pushReplacement(
+                            AddSubject.addSubject(
                                 context,
-                                MaterialPageRoute(builder: (context) => const DashBoardScreen())
+                                widget.subjectName,
+                                widget.subjectCode,
+                                widget.subjectCoordinator,
+                                widget.minAttendancePercent,
+                                widget.subjectLocation
                             );
                           },
                           child: const Text(

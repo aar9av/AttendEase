@@ -12,7 +12,11 @@ class AddSubject1 extends StatefulWidget {
 }
 
 class _AddSubject1State extends State<AddSubject1> {
+  TextEditingController subjectName = TextEditingController();
+  TextEditingController subjectCode = TextEditingController();
+  TextEditingController subjectCoordinator = TextEditingController();
   double minAttendancePercent = 75;
+  TextEditingController subjectLocation = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +55,7 @@ class _AddSubject1State extends State<AddSubject1> {
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
+                        controller: subjectName,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.book),
                           border: OutlineInputBorder(
@@ -64,6 +69,7 @@ class _AddSubject1State extends State<AddSubject1> {
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
+                        controller: subjectCode,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.book),
                           border: OutlineInputBorder(
@@ -77,6 +83,7 @@ class _AddSubject1State extends State<AddSubject1> {
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
+                        controller: subjectCoordinator,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.person),
                           border: OutlineInputBorder(
@@ -131,6 +138,7 @@ class _AddSubject1State extends State<AddSubject1> {
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
+                        controller: subjectLocation,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.location_on),
                           border: OutlineInputBorder(
@@ -153,7 +161,13 @@ class _AddSubject1State extends State<AddSubject1> {
                           onPressed: (){
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const AddSubject2())
+                                MaterialPageRoute(builder: (context) => AddSubject2(
+                                  subjectName: subjectName.text,
+                                  subjectCode: subjectCode.text,
+                                  subjectCoordinator: subjectCoordinator.text,
+                                  minAttendancePercent: minAttendancePercent.toInt(),
+                                  subjectLocation: subjectLocation.text,
+                                )),
                             );
                           },
                           child: const Text(
