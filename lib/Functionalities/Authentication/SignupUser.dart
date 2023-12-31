@@ -22,7 +22,7 @@ class SignupUser {
       );
 
       await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
-        'Name': name,
+        'name': name,
         'email': email,
         'password': password,
       }).catchError((error) {});

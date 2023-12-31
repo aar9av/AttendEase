@@ -1,6 +1,5 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-
 import 'AddSubject2.dart';
 import '../Background.dart';
 

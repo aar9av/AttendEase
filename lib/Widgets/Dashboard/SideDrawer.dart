@@ -1,10 +1,18 @@
 import 'package:attend_easy/Functionalities/Authentication/SignOut.dart';
 import 'package:flutter/material.dart';
+import '../../Functionalities/Retrieve Data/GetUserData.dart';
 import '../Background.dart';
 
 
 class SideDrawer extends StatefulWidget {
-  const SideDrawer({super.key});
+  final UserData userData;
+  final BuildContext context;
+
+  const SideDrawer({
+    Key? key,
+    required this.userData,
+    required this.context,
+  }) : super(key: key);
 
   @override
   State<SideDrawer> createState() => _SideDrawerState();
@@ -12,6 +20,13 @@ class SideDrawer extends StatefulWidget {
 
 
 class _SideDrawerState extends State<SideDrawer> {
+  late UserData userData;
+
+  @override
+  void initState() {
+    super.initState();
+    userData = widget.userData; // Assign the userData from the widget parameter
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,25 +51,25 @@ class _SideDrawerState extends State<SideDrawer> {
               height: 240,
               width: double.infinity,
               padding: const EdgeInsets.all(5),
-              child: const DrawerHeader(
+              child: DrawerHeader(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 50,
                       backgroundImage: AssetImage("Assets/Images/Profile.png"),
                     ),
                     Text(
-                      'Username',
-                      style: TextStyle(
+                      userData.name,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 30,
                       ),
                     ),
                     Text(
-                      'abc@gmail.com',
-                      style: TextStyle(
+                      userData.email,
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                       ),
