@@ -3,7 +3,6 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import '../Background.dart';
 
-
 class AddSubject2 extends StatefulWidget {
   final subjectName;
   final subjectCode;
@@ -24,7 +23,18 @@ class AddSubject2 extends StatefulWidget {
   State<AddSubject2> createState() => _AddSubject2State();
 }
 
+class TimeSlot {
+  bool isChecked;
+  TimeOfDay time;
+
+  TimeSlot({required this.isChecked, required this.time});
+}
+
 class _AddSubject2State extends State<AddSubject2> {
+  List<TimeSlot> timeSlots = List.generate(
+    7,
+        (index) => TimeSlot(isChecked: false, time: TimeOfDay.now()),
+  );
 
   Color getColor(Set<MaterialState> states) {
     return Colors.white;
@@ -32,9 +42,6 @@ class _AddSubject2State extends State<AddSubject2> {
 
   @override
   Widget build(BuildContext context) {
-
-    List<TimeOfDay> time = List.filled(7, TimeOfDay.now());
-    List<bool> isChecked = List.filled(7, false);
     List<String> days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
     return Scaffold(
@@ -75,22 +82,23 @@ class _AddSubject2State extends State<AddSubject2> {
                         child: ListView.separated(
                           itemCount: 7,
                           separatorBuilder: (context, index) => const SizedBox(height: 0),
-                          itemBuilder: (context, index){
+                          itemBuilder: (context, index) {
                             return ListTile(
                               leading: Checkbox(
                                 checkColor: Theme.of(context).primaryColor,
                                 fillColor: MaterialStateProperty.resolveWith(getColor),
-                                value: isChecked[index],
+                                value: timeSlots[index].isChecked,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    isChecked[index] = value!;
+                                    timeSlots[index].isChecked = value!;
                                   });
                                 },
                               ),
                               title: Text(
                                 days[index],
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 16,
+                                  fontWeight: timeSlots[index].isChecked ? FontWeight.bold : FontWeight.normal,
                                 ),
                               ),
                               trailing: Container(
@@ -99,23 +107,27 @@ class _AddSubject2State extends State<AddSubject2> {
                                   border: Border(bottom: BorderSide(color: Colors.black),),
                                 ),
                                 child: TextButton(
-                                  onPressed: () async{
-                                    final TimeOfDay? inputTime = await showTimePicker(
-                                      context: context,
-                                      initialTime: time[index],
-                                      initialEntryMode: TimePickerEntryMode.dial,
-                                    );
-                                    if(inputTime != null){
-                                      setState(() {
-                                        time[index] = inputTime;
-                                      });
+                                  onPressed: () async {
+                                    if (timeSlots[index].isChecked) {
+                                      final TimeOfDay? inputTime = await showTimePicker(
+                                        context: context,
+                                        initialTime: timeSlots[index].time,
+                                        initialEntryMode: TimePickerEntryMode.dial,
+                                      );
+                                      if (inputTime != null) {
+                                        setState(() {
+                                          timeSlots[index].time = inputTime;
+                                        });
+                                      }
                                     }
                                   },
                                   child: Text(
-                                    "${time[index].hour}:${time[index].minute}",
-                                    style: const TextStyle(
+                                    timeSlots[index].isChecked
+                                        ? "${timeSlots[index].time.hour}:${timeSlots[index].time.minute}"
+                                        : 'Select',
+                                    style: TextStyle(
                                       fontSize: 16,
-                                      color: Colors.black,
+                                      color: timeSlots[index].isChecked ? Colors.black : Colors.grey,
                                     ),
                                   ),
                                 ),
@@ -135,14 +147,15 @@ class _AddSubject2State extends State<AddSubject2> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: TextButton(
-                          onPressed: (){
+                          onPressed: () {
                             AddSubject.addSubject(
-                                context,
-                                widget.subjectName,
-                                widget.subjectCode,
-                                widget.subjectCoordinator,
-                                widget.minAttendancePercent,
-                                widget.subjectLocation
+                              context,
+                              widget.subjectName,
+                              widget.subjectCode,
+                              widget.subjectCoordinator,
+                              widget.minAttendancePercent,
+                              widget.subjectLocation,
+                              timeSlots,
                             );
                           },
                           child: const Text(
@@ -166,7 +179,7 @@ class _AddSubject2State extends State<AddSubject2> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: TextButton(
-                          onPressed: (){
+                          onPressed: () {
                             Navigator.pop(context);
                           },
                           child: const Text(
