@@ -1,7 +1,7 @@
 import 'package:attend_easy/Functionalities/Authentication/SignOut.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/User.dart';
-import '../Background.dart';
+import '../../Background.dart';
 
 
 class SideDrawer extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../Functionalities/Authentication/LoginWithEmail.dart';
 import '../../Functionalities/Authentication/LoginWithGoogle.dart';
-import '../Background.dart';
+import '../../Background.dart';
 import 'HeadingBackground.dart';
 
 class LoginScreen extends StatefulWidget {

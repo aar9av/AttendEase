@@ -1,25 +1,56 @@
-import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/EditSubject2.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import '../Background.dart';
+import '../../Functionalities/CloudStore/Subject.dart';
+import '../../Background.dart';
+import 'EditSubject2.dart';
 
 
 class EditSubject1 extends StatefulWidget {
-  const EditSubject1({super.key});
+  final String subjectId;
+
+  EditSubject1({Key? key, required this.subjectId}) : super(key: key);
 
   @override
   State<EditSubject1> createState() => _EditSubject1State();
 }
 
 class _EditSubject1State extends State<EditSubject1> {
+  TextEditingController subjectName = TextEditingController();
+  TextEditingController subjectCode = TextEditingController();
+  TextEditingController subjectCoordinator = TextEditingController();
   double minAttendancePercent = 75;
+  TextEditingController subjectLocation = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchSubjectData();
+  }
+
+  Future<void> _fetchSubjectData() async {
+    try {
+      Map<String, dynamic> subjectData =
+      await Subject.fetchSubjectData(widget.subjectId);
+
+      setState(() {
+        subjectName.text = subjectData['name'] ?? '';
+        subjectCode.text = subjectData['code'] ?? '';
+        subjectCoordinator.text = subjectData['coordinator'] ?? '';
+        minAttendancePercent = (subjectData['minAttendancePercentage'] ?? 75).toDouble();
+        subjectLocation.text = subjectData['location'] ?? '';
+      });
+    } catch (e) {
+      print('Error fetching subject data: $e');
+      // Handle the error as needed
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Edit Subject')),
+        title: const Center(child: Text('Edit New Subject')),
       ),
       body: Stack(
         children: [
@@ -51,6 +82,7 @@ class _EditSubject1State extends State<EditSubject1> {
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
+                        controller: subjectName,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.book),
                           border: OutlineInputBorder(
@@ -64,6 +96,7 @@ class _EditSubject1State extends State<EditSubject1> {
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
+                        controller: subjectCode,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.book),
                           border: OutlineInputBorder(
@@ -77,6 +110,7 @@ class _EditSubject1State extends State<EditSubject1> {
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
+                        controller: subjectCoordinator,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.person),
                           border: OutlineInputBorder(
@@ -105,7 +139,7 @@ class _EditSubject1State extends State<EditSubject1> {
                         value: minAttendancePercent,
                         min: 0,
                         max: 100,
-                        divisions: 20,
+                        divisions: 100,
                         label: minAttendancePercent.round().toString(),
                         onChanged: (double value) {
                           setState(() {
@@ -131,6 +165,7 @@ class _EditSubject1State extends State<EditSubject1> {
                       ),
                       TextField(
                         keyboardType: TextInputType.text,
+                        controller: subjectLocation,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.location_on),
                           border: OutlineInputBorder(
@@ -152,8 +187,15 @@ class _EditSubject1State extends State<EditSubject1> {
                         child: TextButton(
                           onPressed: (){
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const EditSubject2())
+                              context,
+                              MaterialPageRoute(builder: (context) => EditSubject2(
+                                subjectId: widget.subjectId,
+                                subjectName: subjectName.text,
+                                subjectCode: subjectCode.text,
+                                subjectCoordinator: subjectCoordinator.text,
+                                minAttendancePercent: minAttendancePercent.toInt(),
+                                subjectLocation: subjectLocation.text,
+                              )),
                             );
                           },
                           child: const Text(

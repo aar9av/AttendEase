@@ -3,7 +3,7 @@ import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/EditSubject1.dart
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'DashBoardScreen.dart';
-import '../Background.dart';
+import '../../Background.dart';
 import 'SubjectPanel.dart';
 
 
@@ -24,7 +24,7 @@ class _SubjectsListviewState extends State<SubjectsListview> {
   }
 
   Future<void> _fetchSubjects() async {
-    List<Map<String, dynamic>> fetchedSubjects = await Subject.fetchSubjects();
+    List<Map<String, dynamic>> fetchedSubjects = await Subject.fetchAllSubjects();
     setState(() {
       subjects = fetchedSubjects;
     });
@@ -120,7 +120,9 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                       } else{
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const EditSubject1()),
+                          MaterialPageRoute(
+                              builder: (context) => EditSubject1(subjectId: subjects[index]['id'].toString())
+                          ),
                         );
                       }
                     },
@@ -157,7 +159,7 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                               ),
                             ),
                             trailing: Text(
-                              '100%',
+                              subjects[index]['minAttendancePercentage'].toString()+'%',
                               style: TextStyle(
                                 color: Colors.black.withAlpha(150),
                                 fontSize: 26,

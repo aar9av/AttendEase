@@ -1,7 +1,7 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/Subject.dart';
-import '../Background.dart';
+import '../../Background.dart';
 import '../Dashboard/DashBoardScreen.dart';
 
 class AddSubject2 extends StatefulWidget {
@@ -164,7 +164,7 @@ class _AddSubject2State extends State<AddSubject2> {
                             );
                           },
                           child: const Text(
-                            'Add Subject',
+                            'Save',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,

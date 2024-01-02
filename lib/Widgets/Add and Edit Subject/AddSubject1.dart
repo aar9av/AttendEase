@@ -1,7 +1,7 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'AddSubject2.dart';
-import '../Background.dart';
+import '../../Background.dart';
 
 
 class AddSubject1 extends StatefulWidget {
@@ -112,7 +112,7 @@ class _AddSubject1State extends State<AddSubject1> {
                         value: minAttendancePercent,
                         min: 0,
                         max: 100,
-                        divisions: 20,
+                        divisions: 100,
                         label: minAttendancePercent.round().toString(),
                         onChanged: (double value) {
                           setState(() {
