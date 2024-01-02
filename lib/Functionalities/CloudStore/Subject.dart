@@ -2,9 +2,22 @@ import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/AddSubject2.dart'
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../Widgets/Dashboard/DashBoardScreen.dart';
 
-class AddSubject {
+class Subject {
+
+  static Future<List<Map<String, dynamic>>> fetchSubjects() async {
+    String? uid = await fetchUid();
+    CollectionReference userSubjects = FirebaseFirestore.instance.collection('users/$uid/subjects');
+
+    QuerySnapshot<Object?> snapshot = await userSubjects.get();
+
+    return List<Map<String, dynamic>>.from(snapshot.docs.map((doc) {
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      data['id'] = doc.id; // Include the document ID in the data
+      return data;
+    }).toList());
+  }
+
 
   static Future<void> addSubject(
       BuildContext context,
@@ -39,17 +52,26 @@ class AddSubject {
         'location': subjectLocation,
         'timeSlots': timeSlotsData,
       });
-
-      Navigator.pop(context);
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const DashBoardScreen())
-      );
     } catch (e) {
       print('Error adding subjects: $e');
       throw e;
     }
   }
+
+
+  static Future<void> deleteSubject(BuildContext context, String subjectId) async {
+    try {
+      String? uid = await fetchUid();
+
+      if (uid != null) {
+        await FirebaseFirestore.instance.collection('users').doc(uid).collection('subjects').doc(subjectId).delete();
+      }
+    } catch (e) {
+      print('Error deleting subject: $e');
+      throw e;
+    }
+  }
+
 
   static Future<String?> fetchUid() async {
     User? user = FirebaseAuth.instance.currentUser;

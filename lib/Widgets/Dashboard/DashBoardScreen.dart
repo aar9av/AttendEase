@@ -1,7 +1,7 @@
 import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/AddSubject1.dart';
 import 'package:attend_easy/Widgets/Dashboard/SideDrawer.dart';
 import 'package:flutter/material.dart';
-import '../../Functionalities/Retrieve Data/GetUserData.dart';
+import '../../Functionalities/CloudStore/User.dart';
 import 'SubjectsListview.dart';
 
 

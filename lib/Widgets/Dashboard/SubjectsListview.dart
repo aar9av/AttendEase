@@ -1,7 +1,7 @@
+import 'package:attend_easy/Functionalities/CloudStore/Subject.dart';
 import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/EditSubject1.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
-import '../../Functionalities/Retrieve Data/UserSubjects.dart';
 import 'DashBoardScreen.dart';
 import '../Background.dart';
 import 'SubjectPanel.dart';
@@ -24,7 +24,7 @@ class _SubjectsListviewState extends State<SubjectsListview> {
   }
 
   Future<void> _fetchSubjects() async {
-    List<Map<String, dynamic>> fetchedSubjects = await SubjectService.fetchSubjects();
+    List<Map<String, dynamic>> fetchedSubjects = await Subject.fetchSubjects();
     setState(() {
       subjects = fetchedSubjects;
     });
@@ -72,7 +72,7 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                         ),
                       ),
                     ),
-                    key: ValueKey<String>(subjects[index]['id'].toString()),
+                    key: ValueKey<String>(subjects[index]['id']?.toString() ?? ''),
                     onDismissed: (direction){
                       if(direction == DismissDirection.startToEnd){
                         showDialog<int>(
@@ -83,6 +83,7 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                             actions: [
                               TextButton(
                                 onPressed: (){
+                                  Navigator.pop(context);
                                   Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(builder: (context) => const DashBoardScreen())
@@ -91,25 +92,19 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                                 child: const Text('Cancel'),
                               ),
                               TextButton(
-                                onPressed: (){
+                                onPressed: () async {
+                                  await Subject.deleteSubject(context, subjects[index]['id'].toString());
                                   const snackBar = SnackBar(
-                                    padding: EdgeInsets.zero,
-                                    backgroundColor: Colors.white,
-                                    content: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'This Subject is deleted!',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ],
+                                    content: Text(
+                                      'This Subject is deleted!',
                                     ),
                                   );
                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  _fetchSubjects();
+                                  Navigator.pop(context);
                                   Navigator.pushReplacement(
-                                      context, MaterialPageRoute(builder: (context) => const DashBoardScreen())
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const DashBoardScreen())
                                   );
                                 },
                                 child: const Text(

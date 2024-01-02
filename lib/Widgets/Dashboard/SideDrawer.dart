@@ -1,6 +1,6 @@
 import 'package:attend_easy/Functionalities/Authentication/SignOut.dart';
 import 'package:flutter/material.dart';
-import '../../Functionalities/Retrieve Data/GetUserData.dart';
+import '../../Functionalities/CloudStore/User.dart';
 import '../Background.dart';
 
 

@@ -1,5 +1,4 @@
 import 'package:attend_easy/Widgets/Login%20and%20Signup/LoginScreen.dart';
-import 'package:attend_easy/Widgets/Testing/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +41,7 @@ class AttendEase extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot){
-          return (snapshot.hasData)?DashBoardScreen():const LoginScreen();
+          return (snapshot.hasData)?const DashBoardScreen():const LoginScreen();
         },
       ),
     );

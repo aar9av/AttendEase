@@ -1,7 +1,8 @@
-import 'package:attend_easy/Functionalities/Add%20Data/Add%20Subject.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import '../../Functionalities/CloudStore/Subject.dart';
 import '../Background.dart';
+import '../Dashboard/DashBoardScreen.dart';
 
 class AddSubject2 extends StatefulWidget {
   final subjectName;
@@ -32,8 +33,7 @@ class TimeSlot {
 
 class _AddSubject2State extends State<AddSubject2> {
   List<TimeSlot> timeSlots = List.generate(
-    7,
-        (index) => TimeSlot(isChecked: false, time: TimeOfDay.now()),
+    7, (index) => TimeSlot(isChecked: false, time: TimeOfDay.now()),
   );
 
   Color getColor(Set<MaterialState> states) {
@@ -148,7 +148,7 @@ class _AddSubject2State extends State<AddSubject2> {
                         ),
                         child: TextButton(
                           onPressed: () {
-                            AddSubject.addSubject(
+                            Subject.addSubject(
                               context,
                               widget.subjectName,
                               widget.subjectCode,
@@ -156,6 +156,11 @@ class _AddSubject2State extends State<AddSubject2> {
                               widget.minAttendancePercent,
                               widget.subjectLocation,
                               timeSlots,
+                            );
+                            Navigator.pop(context);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const DashBoardScreen())
                             );
                           },
                           child: const Text(
