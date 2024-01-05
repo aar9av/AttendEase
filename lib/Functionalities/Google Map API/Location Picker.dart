@@ -33,7 +33,7 @@ class _LocationPickerState extends State<LocationPicker> {
 
   @override
   Widget build(BuildContext context) {
-    print(currentLocation);
+
     return Scaffold(
       body: Stack(
         children: [

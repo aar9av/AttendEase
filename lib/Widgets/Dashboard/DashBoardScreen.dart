@@ -1,7 +1,7 @@
 import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/AddSubject1.dart';
 import 'package:attend_easy/Widgets/Dashboard/SideDrawer.dart';
 import 'package:flutter/material.dart';
-import '../../Functionalities/CloudStore/User.dart';
+import '../../Functionalities/CloudStore/Users.dart';
 import 'SubjectsListview.dart';
 
 
@@ -23,11 +23,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   Future<void> getUserData() async {
     try {
-      UserDataService userDataService = UserDataService();
-      UserData user = await userDataService.getUserData();
-
+      Users user = Users();
+      UserData userD = await user.getUserData();
       setState(() {
-        userData = user;
+        userData = userD;
       });
     } catch (e) {
       // Handle error
@@ -41,7 +40,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     return Scaffold(
       drawer: Builder(
         builder: (context) => Drawer(
-          child: SideDrawer(userData: userData, context: context),
+          child: SideDrawer(
+              userData: userData,
+              context: context
+          ),
         ),
       ),
       appBar: AppBar(

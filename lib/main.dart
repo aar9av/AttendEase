@@ -41,7 +41,8 @@ class AttendEase extends StatelessWidget {
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot){
-          return (snapshot.hasData)?const DashBoardScreen():const LoginScreen();
+          return
+            (snapshot.hasData)?const DashBoardScreen():const LoginScreen();
         },
       ),
     );

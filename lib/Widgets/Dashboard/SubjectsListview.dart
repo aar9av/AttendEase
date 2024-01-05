@@ -36,142 +36,141 @@ class _SubjectsListviewState extends State<SubjectsListview> {
       body: Stack(
           children: [
             const Background(),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ListView.builder(
-                itemCount: subjects.length,
-                itemBuilder: (context, index){
-                  return Dismissible(
-                    background: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.75),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.all(20.0),
-                        child: const Icon(
-                          Icons.delete_rounded,
-                          color: Colors.white,
-                          size: 60,
-                        ),
-                      ),
+            ListView.builder(
+              padding: const EdgeInsets.all(10),
+              itemCount: subjects.length,
+              itemBuilder: (context, index){
+                return Dismissible(
+                  background: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red.withOpacity(0.75),
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                    secondaryBackground: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.75),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Container(
-                        alignment: Alignment.centerRight,
-                        padding:const  EdgeInsets.all(20.0),
-                        child: const Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 60,
-                        ),
-                      ),
-                    ),
-                    key: ValueKey<String>(subjects[index]['id']?.toString() ?? ''),
-                    onDismissed: (direction){
-                      if(direction == DismissDirection.startToEnd){
-                        showDialog<int>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Alert'),
-                            content: const Text('Are you sure you want to delete this Subject !!!'),
-                            actions: [
-                              TextButton(
-                                onPressed: (){
-                                  Navigator.pop(context);
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => const DashBoardScreen())
-                                  );
-                                },
-                                child: const Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () async {
-                                  await Subject.deleteSubject(context, subjects[index]['id'].toString());
-                                  const snackBar = SnackBar(
-                                    content: Text(
-                                      'This Subject is deleted!',
-                                    ),
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                  _fetchSubjects();
-                                  Navigator.pop(context);
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(builder: (context) => const DashBoardScreen())
-                                  );
-                                },
-                                child: const Text(
-                                  'Delete',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        );
-                      } else{
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditSubject1(subjectId: subjects[index]['id'].toString())
-                          ),
-                        );
-                      }
-                    },
                     child: Container(
-                      margin: const EdgeInsets.all(10),
-                      child: BlurryContainer(
-                        color: Colors.black54.withOpacity(0.1),
-                        blur: 2,
-                        child: TextButton(
-                          onPressed: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const SubjectPanel()),
-                            );
-                          },
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.book,
-                              size: 40,
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.all(20.0),
+                      child: const Icon(
+                        Icons.delete_rounded,
+                        color: Colors.white,
+                        size: 60,
+                      ),
+                    ),
+                  ),
+                  secondaryBackground: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.75),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      padding:const  EdgeInsets.all(20.0),
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 60,
+                      ),
+                    ),
+                  ),
+                  key: ValueKey<String>(subjects[index]['id']?.toString() ?? ''),
+                  onDismissed: (direction){
+                    if(direction == DismissDirection.startToEnd){
+                      showDialog<int>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Alert'),
+                          content: const Text('Are you sure you want to delete this Subject !!!'),
+                          actions: [
+                            TextButton(
+                              onPressed: (){
+                                Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const DashBoardScreen())
+                                );
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await Subject.deleteSubject(context, subjects[index]['id'].toString());
+                                const snackBar = SnackBar(
+                                  content: Text(
+                                    'This Subject is deleted!',
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                _fetchSubjects();
+                                Navigator.pop(context);
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => const DashBoardScreen())
+                                );
+                              },
+                              child: const Text(
+                                'Delete',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    } else{
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditSubject1(subjectId: subjects[index]['id'].toString())
+                        ),
+                      );
+                    }
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.all(10),
+                    child: BlurryContainer(
+                      color: Colors.black54.withOpacity(0.1),
+                      blur: 2,
+                      child: TextButton(
+                        onPressed: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const SubjectPanel()),
+                          );
+                        },
+                        child: ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          leading: Icon(
+                            Icons.book,
+                            size: 40,
+                            color: Colors.black.withAlpha(150),
+                          ),
+                          title: Text(
+                            subjects[index]['name'] ?? '',
+                            style: TextStyle(
+                              color: Colors.black.withAlpha(200),
+                              fontSize: 22,
+                            ),
+                          ),
+                          subtitle: Text(
+                            subjects[index]['coordinator'] ?? '',
+                            style: TextStyle(
+                              color: Colors.black.withAlpha(200),
+                              fontSize: 14,
+                            ),
+                          ),
+                          trailing: Text(
+                            '${subjects[index]['minAttendancePercentage']}%',
+                            style: TextStyle(
                               color: Colors.black.withAlpha(150),
-                            ),
-                            title: Text(
-                              subjects[index]['name'] ?? '',
-                              style: TextStyle(
-                                color: Colors.black.withAlpha(200),
-                                fontSize: 24,
-                              ),
-                            ),
-                            subtitle: Text(
-                              subjects[index]['coordinator'] ?? '',
-                              style: TextStyle(
-                                color: Colors.black.withAlpha(200),
-                                fontSize: 16,
-                              ),
-                            ),
-                            trailing: Text(
-                              subjects[index]['minAttendancePercentage'].toString()+'%',
-                              style: TextStyle(
-                                color: Colors.black.withAlpha(150),
-                                fontSize: 26,
-                              ),
+                              fontSize: 26,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ]
       ),

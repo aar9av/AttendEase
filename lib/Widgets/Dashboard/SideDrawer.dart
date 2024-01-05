@@ -1,7 +1,9 @@
 import 'package:attend_easy/Functionalities/Authentication/SignOut.dart';
 import 'package:flutter/material.dart';
-import '../../Functionalities/CloudStore/User.dart';
+import '../../Functionalities/CloudStore/Users.dart';
 import '../../Background.dart';
+import '../Side Panel/Profile.dart';
+import '../Side Panel/Settings.dart';
 
 
 class SideDrawer extends StatefulWidget {
@@ -52,29 +54,31 @@ class _SideDrawerState extends State<SideDrawer> {
               width: double.infinity,
               padding: const EdgeInsets.all(5),
               child: DrawerHeader(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage("Assets/Images/Profile.png"),
-                    ),
-                    Text(
-                      userData.name,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage("Assets/Images/Profile.png"),
                       ),
-                    ),
-                    Text(
-                      userData.email,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
+                      Text(
+                        userData.name,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                        ),
                       ),
-                    ),
-                  ],
+                      Text(
+                        userData.email,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -91,7 +95,10 @@ class _SideDrawerState extends State<SideDrawer> {
                         children: [
                           TextButton(
                             onPressed: (){
-                      
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Profile(userData: userData)),
+                              );
                             },
                             child: const Row(
                               children: [
@@ -113,7 +120,10 @@ class _SideDrawerState extends State<SideDrawer> {
                           ),
                           TextButton(
                             onPressed: (){
-                      
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const Settings()),
+                              );
                             },
                             child: const Row(
                               children: [

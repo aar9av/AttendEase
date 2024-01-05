@@ -25,6 +25,8 @@ class SignupUser {
         'name': name,
         'email': email,
         'password': password,
+        'college': '',
+        'course': '',
       }).catchError((error) {});
 
       // ignore: use_build_context_synchronously
