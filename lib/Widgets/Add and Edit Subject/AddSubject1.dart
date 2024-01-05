@@ -1,8 +1,8 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import '../../Functionalities/Google Map API/Location Picker.dart';
 import 'AddSubject2.dart';
 import '../../Background.dart';
-
 
 class AddSubject1 extends StatefulWidget {
   const AddSubject1({super.key});
@@ -17,13 +17,14 @@ class _AddSubject1State extends State<AddSubject1> {
   TextEditingController subjectCoordinator = TextEditingController();
   double minAttendancePercent = 75;
   TextEditingController subjectLocation = TextEditingController();
+  bool validateSubjectName = true;
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text('Add New Subject')),
+        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -59,9 +60,10 @@ class _AddSubject1State extends State<AddSubject1> {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.book),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50)
+                            borderRadius: BorderRadius.circular(50),
                           ),
                           labelText: 'Subject Name',
+                          errorText: validateSubjectName ? null : "Subject name can not be empty!",
                         ),
                       ),
                       const SizedBox(
@@ -73,7 +75,7 @@ class _AddSubject1State extends State<AddSubject1> {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.book),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50)
+                            borderRadius: BorderRadius.circular(50),
                           ),
                           labelText: 'Subject Code',
                         ),
@@ -87,7 +89,7 @@ class _AddSubject1State extends State<AddSubject1> {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.person),
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50)
+                            borderRadius: BorderRadius.circular(50),
                           ),
                           labelText: 'Subject Coordinator',
                         ),
@@ -123,28 +125,50 @@ class _AddSubject1State extends State<AddSubject1> {
                       const Divider(
                         color: Colors.grey,
                       ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          'Location',
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 24,
-                          ),
-                        ),
-                      ),
                       const SizedBox(
                         height: 10,
                       ),
-                      TextField(
-                        keyboardType: TextInputType.text,
-                        controller: subjectLocation,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.location_on),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50)
+                      Container(
+                        width: double.infinity,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Theme.of(context).primaryColor,
+                            width: 1,
                           ),
-                          labelText: 'Location',
+                        ),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute<LocationData>(
+                                builder: (context) => LocationPicker(),
+                              ),
+                            ).then((selectedLocation) {
+                              // Handle the selected location (if needed)
+                              if (selectedLocation != null) {
+                                setState(() {
+                                  subjectLocation.text = "(${selectedLocation.latitude}, ${selectedLocation.longitude})";
+                                });
+                              }
+                            });
+                          },
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                size: 40,
+                              ),
+                              Text(
+                                ' Select Location',
+                                style: TextStyle(
+                                  fontSize: 24,
+                                ),
+                              ),
+                            ],
+                          )
                         ),
                       ),
                       const SizedBox(
@@ -158,17 +182,28 @@ class _AddSubject1State extends State<AddSubject1> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: TextButton(
-                          onPressed: (){
-                            Navigator.push(
+                          onPressed: () {
+                            setState(() {
+                              validateSubjectName = subjectName.text.isNotEmpty;
+                            });
+                            if(validateSubjectName) {
+                              // Navigate to the next screen (AddSubject2)
+                              Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => AddSubject2(
-                                  subjectName: subjectName.text,
-                                  subjectCode: subjectCode.text,
-                                  subjectCoordinator: subjectCoordinator.text,
-                                  minAttendancePercent: minAttendancePercent.toInt(),
-                                  subjectLocation: subjectLocation.text,
-                                )),
-                            );
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      AddSubject2(
+                                        subjectName: subjectName.text,
+                                        subjectCode: subjectCode.text,
+                                        subjectCoordinator: subjectCoordinator
+                                            .text,
+                                        minAttendancePercent: minAttendancePercent
+                                            .toInt(),
+                                        subjectLocation: subjectLocation.text,
+                                      ),
+                                ),
+                              );
+                            }
                           },
                           child: const Text(
                             'Next',
@@ -191,7 +226,7 @@ class _AddSubject1State extends State<AddSubject1> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: TextButton(
-                          onPressed: (){
+                          onPressed: () {
                             Navigator.pop(context);
                           },
                           child: const Text(

@@ -40,10 +40,15 @@ dependencies:
   table_calendar: ^3.0.9
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
-  cloud_firestore: ^4.13.6
   google_sign_in: ^6.2.1
+  cloud_firestore: ^4.13.6
   grpc: ^3.2.4
   protobuf: ^3.1.0
+  location: ^5.0.3
+  google_maps_flutter: ^2.5.0
+  geolocator: ^10.1.0
+
+permission_handler: ^14.1.1
 
 
 dev_dependencies:
