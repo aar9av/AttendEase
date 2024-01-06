@@ -1,7 +1,8 @@
+import 'package:attend_easy/Widgets/Dashboard/DashBoardScreen.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/Subject.dart';
-import '../../Background.dart';
+import '../Start & UI/Background.dart';
 import '../../Functionalities/Google Map API/Location Picker.dart';
 import 'EditSubject2.dart';
 
@@ -256,7 +257,10 @@ class _EditSubject1State extends State<EditSubject1> {
                         ),
                         child: TextButton(
                           onPressed: (){
-                            Navigator.pop(context);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const DashBoardScreen())
+                            );
                           },
                           child: const Text(
                             'Cancel',

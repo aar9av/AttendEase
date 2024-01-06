@@ -1,9 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/AddSubject1.dart';
 import 'package:attend_easy/Widgets/Dashboard/SideDrawer.dart';
-import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/Users.dart';
+import '../Start & UI/LoadingPage.dart';
 import 'SubjectsListview.dart';
-
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
@@ -14,6 +14,7 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   late UserData userData; // Variable to store user data
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -27,6 +28,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       UserData userD = await user.getUserData();
       setState(() {
         userData = userD;
+        isLoading = false;
       });
     } catch (e) {
       // Handle error
@@ -36,8 +38,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
+    return
+    isLoading ?
+    const Scaffold(
+      body: LoadingPage(),
+    ):
+    Scaffold(
       drawer: Builder(
         builder: (context) => Drawer(
           child: SideDrawer(
@@ -54,7 +60,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       body: const SubjectsListview(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const AddSubject1())
           );

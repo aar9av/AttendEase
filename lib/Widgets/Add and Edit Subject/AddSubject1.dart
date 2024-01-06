@@ -1,8 +1,9 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/Google Map API/Location Picker.dart';
+import '../Dashboard/DashBoardScreen.dart';
 import 'AddSubject2.dart';
-import '../../Background.dart';
+import '../Start & UI/Background.dart';
 
 class AddSubject1 extends StatefulWidget {
   const AddSubject1({super.key});
@@ -227,7 +228,10 @@ class _AddSubject1State extends State<AddSubject1> {
                         ),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pop(context);
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => const DashBoardScreen())
+                            );
                           },
                           child: const Text(
                             'Cancel',

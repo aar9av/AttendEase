@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../Functionalities/Authentication/LoginWithEmail.dart';
 import '../../Functionalities/Authentication/LoginWithGoogle.dart';
-import '../../Background.dart';
 import 'HeadingBackground.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -48,117 +47,120 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           const HeadingBackground(heading: 'Already\nHave An\nAccount?',),
           Center(
-            child: BlurryContainer(
-              height: 450,
-              width: 300,
-              blur: 5,
-              color: Colors.transparent.withOpacity(0.05),
-              padding: const EdgeInsets.all(8),
-              borderRadius: const BorderRadius.all(Radius.circular(20)),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: email,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.email),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        labelText: 'Enter Username',
-                        errorText: validateUsername ? null : "Invalid Username",
+            child: Container(
+              margin: const EdgeInsets.all(30),
+              child: BlurryContainer(
+                blur: 5,
+                color: Colors.transparent.withOpacity(0.05),
+                padding: const EdgeInsets.all(20),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        height: 20,
                       ),
-                    ),
-                    TextField(
-                      keyboardType: TextInputType.visiblePassword,
-                      controller: password,
-                      obscureText: passwordVisible,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.key),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50)
+                      TextField(
+                        keyboardType: TextInputType.emailAddress,
+                        controller: email,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.email),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          labelText: 'Enter Username',
+                          errorText: validateUsername ? null : "Invalid Username",
                         ),
-                        labelText: 'Password',
-                        errorText: validatePassword ? null : "Password must contain at least 8 characters",
-                        suffixIcon: IconButton(
-                          icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
-                          onPressed: () {
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextField(
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: password,
+                        obscureText: passwordVisible,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.key),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50)
+                          ),
+                          labelText: 'Password',
+                          errorText: validatePassword ? null : "Password must contain at least 8 characters",
+                          suffixIcon: IconButton(
+                            icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
+                            onPressed: () {
+                              setState(() {
+                                passwordVisible = !passwordVisible;
+                              },);
+                            },
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: TextButton(
+                          onPressed: (){
                             setState(() {
-                              passwordVisible = !passwordVisible;
-                            },);
+                              validateUsername = email.text.contains('@');
+                              validatePassword = password.text.length>=8;
+                            });
+                            if(validateUsername && validatePassword) {
+                              LoginWithEmail(email: email.text, password: password.text).loginWithEmail(context);
+                            }
                           },
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: TextButton(
+                      TextButton(
                         onPressed: (){
-                          setState(() {
-                            validateUsername = email.text.contains('@');
-                            validatePassword = password.text.length>=8;
-                          });
-                          if(validateUsername && validatePassword) {
-                            LoginWithEmail(email: email.text, password: password.text).loginWithEmail(context);
-                          }
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                          );
                         },
-                        child: const Text(
-                          'Login',
+                        child: Text(
+                          'New User? Register Now',
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: (){
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => const SignUpScreen()),
-                        );
-                      },
-                      child: Text(
-                        'New User? Register Now',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
+                      const Text('or login with'),
+                      Container(
+                        width: double.infinity,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: IconButton(
+                          onPressed: (){
+                            LoginWithGoogle().loginWithGoogle(context);
+                          },
+                          icon: Image.asset("Assets/Images/Google.jpg"),
                         ),
                       ),
-                    ),
-                    const Text('or login with'),
-                    Container(
-                      width: double.infinity,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: IconButton(
-                        onPressed: (){
-                          LoginWithGoogle().loginWithGoogle(context);
-                        },
-                        icon: Image.asset("Assets/Images/Google.jpg"),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

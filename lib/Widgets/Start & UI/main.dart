@@ -1,8 +1,8 @@
+import 'package:attend_easy/Widgets/Start%20&%20UI/LoadingPage.dart';
 import 'package:attend_easy/Widgets/Login%20and%20Signup/LoginScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'Widgets/Dashboard/DashBoardScreen.dart';
+import '../Dashboard/DashBoardScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,13 +38,19 @@ class AttendEase extends StatelessWidget {
           )
         ),
       ),
-      home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot){
-          return
-            (snapshot.hasData)?const DashBoardScreen():const LoginScreen();
+      home:
+      FutureBuilder(
+        future: Future.delayed(const Duration(seconds: 3)),
+        builder: (BuildContext context, AsyncSnapshot snapshot){
+          if(snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingPage();    ///Splash Screen
+          } else{
+            return (snapshot.hasData)?
+            const DashBoardScreen():
+            const LoginScreen(); ///Main Screen
+          }
         },
-      ),
+      )
     );
   }
 }

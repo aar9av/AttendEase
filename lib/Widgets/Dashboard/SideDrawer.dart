@@ -1,7 +1,7 @@
 import 'package:attend_easy/Functionalities/Authentication/SignOut.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/Users.dart';
-import '../../Background.dart';
+import '../Start & UI/Background.dart';
 import '../Side Panel/Profile.dart';
 import '../Side Panel/Settings.dart';
 
@@ -46,18 +46,17 @@ class _SideDrawerState extends State<SideDrawer> {
             ],
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
             Container(
-              height: 240,
+              height: 260,
               width: double.infinity,
               padding: const EdgeInsets.all(5),
               child: DrawerHeader(
+                margin: const EdgeInsets.only(top: 18),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       const CircleAvatar(
                         radius: 50,
@@ -82,8 +81,9 @@ class _SideDrawerState extends State<SideDrawer> {
                 ),
               ),
             ),
-            SizedBox(
+            Container(
               height: MediaQuery.of(context).size.height-260,
+              margin: const EdgeInsets.only(top: 240),
               child: Stack(
                 children: [
                   const Background(),

@@ -1,4 +1,4 @@
-import 'package:attend_easy/Background.dart';
+import 'package:attend_easy/Widgets/Start%20&%20UI/Background.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';

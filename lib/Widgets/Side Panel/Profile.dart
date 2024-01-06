@@ -1,5 +1,6 @@
-import 'package:attend_easy/Background.dart';
+import 'package:attend_easy/Widgets/Start%20&%20UI/Background.dart';
 import 'package:attend_easy/Functionalities/CloudStore/Users.dart';
+import 'package:attend_easy/Widgets/Dashboard/DashBoardScreen.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Edit Profile')),
+        title: const Text('Edit Profile'),
       ),
       body: Stack(
         children: [
@@ -215,6 +216,10 @@ class _ProfileState extends State<Profile> {
                                 password.text,
                               );
                               Navigator.pop(context);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const DashBoardScreen())
+                              );
                             }
                           },
                           child: const Text(

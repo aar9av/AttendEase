@@ -3,7 +3,7 @@ import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/EditSubject1.dart
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'DashBoardScreen.dart';
-import '../../Background.dart';
+import '../Start & UI/Background.dart';
 import 'SubjectPanel.dart';
 
 
@@ -117,7 +117,7 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                         ),
                       );
                     } else{
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => EditSubject1(subjectId: subjects[index]['id'].toString())

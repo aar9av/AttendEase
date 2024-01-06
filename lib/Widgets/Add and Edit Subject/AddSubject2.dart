@@ -1,7 +1,7 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/Subject.dart';
-import '../../Background.dart';
+import '../Start & UI/Background.dart';
 import '../Dashboard/DashBoardScreen.dart';
 
 class AddSubject2 extends StatefulWidget {
@@ -84,6 +84,7 @@ class _AddSubject2State extends State<AddSubject2> {
                           separatorBuilder: (context, index) => const SizedBox(height: 0),
                           itemBuilder: (context, index) {
                             return ListTile(
+                              contentPadding: EdgeInsets.zero,
                               leading: Checkbox(
                                 checkColor: Theme.of(context).primaryColor,
                                 fillColor: MaterialStateProperty.resolveWith(getColor),
