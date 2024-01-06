@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_rethrow_when_possible
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +105,6 @@ class Users {
       }
     } catch (e) {
       print('Error deleting user: $e');
-      // Handle the error as needed
     }
   }
 

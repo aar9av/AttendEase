@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -24,10 +26,10 @@ class _LocationPickerState extends State<LocationPicker> {
     try {
       Position userLocation = await getLocationInstance.getCurrentLocation();
       setState(() {
-        currentLocation = LatLng(userLocation.latitude!, userLocation.longitude!);
+        currentLocation = LatLng(userLocation.latitude, userLocation.longitude);
       });
     } catch (e) {
-      print("Exyz: $e");
+      print("Error: $e");
     }
   }
 
@@ -71,7 +73,7 @@ class _LocationPickerState extends State<LocationPicker> {
         ),
         child: ElevatedButton(
           onPressed: () {
-            // Pass the selected location back to the previous screen
+
             Navigator.pop(context, LocationData.fromMap({
               "latitude": currentLocation.latitude,
               "longitude": currentLocation.longitude,
@@ -93,7 +95,7 @@ class _LocationPickerState extends State<LocationPicker> {
     );
   }
 
-  // Helper method to animate the camera to the current location
+
   Future<void> _animateToCurrentLocation() async {
     if (mapController != null) {
       await mapController!.animateCamera(

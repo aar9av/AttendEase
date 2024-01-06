@@ -1,13 +1,13 @@
-import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/AddSubject2.dart';
+// ignore_for_file: avoid_print, use_rethrow_when_possible
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import '../../Widgets/Add and Edit Subject/AddSubject2.dart';
 import '../../Widgets/Add and Edit Subject/EditSubject2.dart';
 
 class Subject {
 
-  // -------------- Add New Subject
   static Future<void> addSubject(
       BuildContext context,
       String subjectName,
@@ -47,7 +47,7 @@ class Subject {
     }
   }
 
-  // -------------- Return List of Subjects
+
   static Future<List<Map<String, dynamic>>> fetchAllSubjects() async {
     String? uid = await fetchUid();
     CollectionReference userSubjects = FirebaseFirestore.instance
@@ -62,7 +62,7 @@ class Subject {
     }).toList());
   }
 
-  // -------------- Return Fields of Subject
+
   static Future<Map<String, dynamic>> fetchSubjectData(String subjectId) async {
     try {
       String? uid = await fetchUid();
@@ -100,7 +100,7 @@ class Subject {
     }
   }
 
-  // -------------- Edit Subject
+
   static Future<void> editSubject(
       BuildContext context,
       String subjectId,
@@ -144,7 +144,7 @@ class Subject {
     }
   }
 
-  // -------------- Delete Subject
+
   static Future<void> deleteSubject(BuildContext context, String subjectId) async {
     try {
       String? uid = await fetchUid();

@@ -1,8 +1,8 @@
-import 'package:attend_easy/Widgets/Login%20and%20Signup/LoginScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../Dashboard/DashBoardScreen.dart';
+import '../Login and Signup/LoginScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

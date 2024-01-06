@@ -1,7 +1,9 @@
-import 'package:attend_easy/Widgets/Login%20and%20Signup/LoginScreen.dart';
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../../Widgets/Login and Signup/LoginScreen.dart';
 
 class SignupUser {
   final String name;
@@ -29,14 +31,13 @@ class SignupUser {
         'course': '',
       }).catchError((error) {});
 
-      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginScreen()),
       );
 
     } catch (e) {
-      // ignore: use_build_context_synchronously
+
       showDialog(
         context: context,
         builder: (BuildContext context) {
