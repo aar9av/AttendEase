@@ -1,5 +1,3 @@
-import 'package:attend_easy/Widgets/Start%20&%20UI/Background.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -56,13 +54,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
         children: [
           const HeadingBackground(heading: 'Here is your\nfirst step\nwith us!',),
           Center(
-            child: Container(
+            child: Card(
+              elevation: 5,
               margin: const EdgeInsets.all(30),
-              child: BlurryContainer(
-                blur: 5,
-                color: Colors.transparent.withOpacity(0.05),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Container(
                 padding: const EdgeInsets.all(20),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  gradient: LinearGradient(
+                    begin: AlignmentDirectional.topStart,
+                    end: AlignmentDirectional.bottomEnd,
+                    colors: [
+                      Color(0xffddfeff),
+                      Color(0xffcfd7ff),
+                    ],
+                  ),
+                ),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

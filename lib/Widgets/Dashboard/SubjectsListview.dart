@@ -1,7 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:attend_easy/Functionalities/CloudStore/Subject.dart';
-import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/EditSubject1.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import '../Add and Edit Subject/EditSubject1.dart';
 import 'DashBoardScreen.dart';
 import '../Start & UI/Background.dart';
 import 'SubjectPanel.dart';
@@ -125,11 +126,24 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                       );
                     }
                   },
-                  child: Container(
+                  child: Card(
+                    elevation: 5,
                     margin: const EdgeInsets.all(10),
-                    child: BlurryContainer(
-                      color: Colors.black54.withOpacity(0.1),
-                      blur: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        gradient: LinearGradient(
+                          begin: AlignmentDirectional.topStart,
+                          end: AlignmentDirectional.bottomEnd,
+                          colors: [
+                            Color(0xffddfeff),
+                            Color(0xffcfd7ff),
+                          ],
+                        ),
+                      ),
                       child: TextButton(
                         onPressed: (){
                           Navigator.push(

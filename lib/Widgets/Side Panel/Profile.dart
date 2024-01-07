@@ -1,8 +1,7 @@
-import 'package:attend_easy/Widgets/Start%20&%20UI/Background.dart';
-import 'package:attend_easy/Functionalities/CloudStore/Users.dart';
-import 'package:attend_easy/Widgets/Dashboard/DashBoardScreen.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import '../../Functionalities/CloudStore/Users.dart';
+import '../Dashboard/DashBoardScreen.dart';
+import '../Start & UI/Background.dart';
 
 class Profile extends StatefulWidget {
   final UserData userData;
@@ -61,13 +60,25 @@ class _ProfileState extends State<Profile> {
         children: [
           const Background(),
           Center(
-            child: Container(
+            child: Card(
+              elevation: 5,
               margin: const EdgeInsets.all(20),
-              child: BlurryContainer(
-                blur: 5,
-                color: Colors.transparent.withOpacity(0.05),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Container(
                 padding: const EdgeInsets.all(20),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  gradient: LinearGradient(
+                    begin: AlignmentDirectional.topStart,
+                    end: AlignmentDirectional.bottomEnd,
+                    colors: [
+                      Color(0xffddfeff),
+                      Color(0xffcfd7ff),
+                    ],
+                  ),
+                ),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

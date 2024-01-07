@@ -1,10 +1,9 @@
-import 'package:attend_easy/Widgets/Login%20and%20Signup/SignUpScreen.dart';
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../Functionalities/Authentication/LoginWithEmail.dart';
 import '../../Functionalities/Authentication/LoginWithGoogle.dart';
 import 'HeadingBackground.dart';
+import 'SignUpScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -47,13 +46,25 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           const HeadingBackground(heading: 'Already\nHave An\nAccount?',),
           Center(
-            child: Container(
-              margin: const EdgeInsets.all(30),
-              child: BlurryContainer(
-                blur: 5,
-                color: Colors.transparent.withOpacity(0.05),
+            child: Card(
+              elevation: 5,
+              margin: const EdgeInsets.all(40),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Container(
                 padding: const EdgeInsets.all(20),
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  gradient: LinearGradient(
+                    begin: AlignmentDirectional.topStart,
+                    end: AlignmentDirectional.bottomEnd,
+                    colors: [
+                      Color(0xffddfeff),
+                      Color(0xffcfd7ff),
+                    ],
+                  ),
+                ),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -145,6 +156,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const Text('or login with'),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         width: double.infinity,
                         height: 40,

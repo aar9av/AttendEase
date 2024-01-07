@@ -1,4 +1,3 @@
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/Subject.dart';
 import '../Start & UI/Background.dart';
@@ -52,15 +51,26 @@ class _AddSubject2State extends State<AddSubject2> {
         children: [
           const Background(),
           Center(
-            child: SingleChildScrollView(
+            child: Card(
+              elevation: 5,
+              margin: const EdgeInsets.all(20),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: Container(
-                height: 650,
-                margin: const EdgeInsets.all(30.0),
-                child: BlurryContainer(
-                  blur: 5,
-                  color: Colors.transparent.withOpacity(0.05),
-                  padding: const EdgeInsets.all(20),
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                padding: const EdgeInsets.all(20),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  gradient: LinearGradient(
+                    begin: AlignmentDirectional.topStart,
+                    end: AlignmentDirectional.bottomEnd,
+                    colors: [
+                      Color(0xffddfeff),
+                      Color(0xffcfd7ff),
+                    ],
+                  ),
+                ),
+                child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
