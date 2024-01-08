@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:attend_easy/Widgets/Add%20and%20Edit%20Subject/AddSubject1.dart';
-import 'package:attend_easy/Widgets/Dashboard/SideDrawer.dart';
 import '../../Functionalities/CloudStore/Users.dart';
+import '../Add and Edit Subject/AddSubject1.dart';
 import '../Start & UI/LoadingPage.dart';
+import 'SideDrawer.dart';
 import 'SubjectsListview.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -19,7 +19,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   void initState() {
     super.initState();
-    getUserData(); // Fetch user data when the page is initialized
+    getUserData();
   }
 
   Future<void> getUserData() async {
@@ -39,10 +39,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
     return
-    isLoading ?
-    const Scaffold(
-      body: LoadingPage(),
-    ):
+    isLoading ? const Scaffold( body: LoadingPage() ) :
     Scaffold(
       drawer: Builder(
         builder: (context) => Drawer(

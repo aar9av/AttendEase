@@ -13,7 +13,7 @@ import 'package:attend_easy/Widgets/Start%20&%20UI/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const AttendEase());
+    await tester.pumpWidget(AttendEase());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
