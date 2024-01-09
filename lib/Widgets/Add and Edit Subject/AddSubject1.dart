@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../Functionalities/Google Map API/Location Picker.dart';
 import '../Dashboard/DashBoardScreen.dart';
 import 'AddSubject2.dart';
@@ -16,15 +17,16 @@ class _AddSubject1State extends State<AddSubject1> {
   TextEditingController subjectCode = TextEditingController();
   TextEditingController subjectCoordinator = TextEditingController();
   double minAttendancePercent = 75;
-  TextEditingController subjectLocation = TextEditingController();
+  LatLng subjectLocation = const LatLng(23.2152, 77.4099);
   bool validateSubjectName = true;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    return
+      Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Add New Subject')),
-        centerTitle: true,
+        title: const Text('Add New Subject'),
       ),
       body: Stack(
         children: [
@@ -126,7 +128,7 @@ class _AddSubject1State extends State<AddSubject1> {
                         value: minAttendancePercent,
                         min: 0,
                         max: 100,
-                        divisions: 100,
+                        divisions: 20,
                         label: minAttendancePercent.round().toString(),
                         onChanged: (double value) {
                           setState(() {
@@ -155,14 +157,15 @@ class _AddSubject1State extends State<AddSubject1> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute<LocationData>(
-                                builder: (context) => LocationPicker(),
+                              MaterialPageRoute(
+                                builder: (context) => LocationPicker(
+                                  subjectLocation: subjectLocation,
+                                ),
                               ),
                             ).then((selectedLocation) {
-                              // Handle the selected location (if needed)
                               if (selectedLocation != null) {
                                 setState(() {
-                                  subjectLocation.text = "(${selectedLocation.latitude}, ${selectedLocation.longitude})";
+                                  subjectLocation = selectedLocation;
                                 });
                               }
                             });
@@ -211,7 +214,7 @@ class _AddSubject1State extends State<AddSubject1> {
                                             .text,
                                         minAttendancePercent: minAttendancePercent
                                             .toInt(),
-                                        subjectLocation: subjectLocation.text,
+                                        subjectLocation: subjectLocation,
                                       ),
                                 ),
                               );
@@ -239,10 +242,7 @@ class _AddSubject1State extends State<AddSubject1> {
                         ),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => const DashBoardScreen())
-                            );
+                            Navigator.pop(context);
                           },
                           child: const Text(
                             'Cancel',

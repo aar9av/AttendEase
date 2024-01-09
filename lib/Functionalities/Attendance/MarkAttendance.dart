@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../CloudStore/Subject.dart';
@@ -7,20 +7,25 @@ markAttendance() async{
   var subjects = await Subject.fetchAllSubjects();
   var day = DateTime.now().weekday-1;
   var hour = DateTime.now().hour;
+  print('start');
   for(var subject in subjects){
+    print('subject');
     if(subject['timeSlots'][day]['isChecked']){
+      print('day verified');
       if(subject['timeSlots'][day]['time']['hour'] == hour){
+        print('hour verified');
         Position userLocation = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-        LatLng lectureLocation = parseLatLng(subject['location']);
+        GeoPoint lectureLocation = subject['location'];
         double distanceInMeters = Geolocator.distanceBetween(
           userLocation.latitude,
           userLocation.longitude,
           lectureLocation.latitude,
           lectureLocation.longitude,
         );
-        if(distanceInMeters <= 50) {
-          print('Write your code Here');
+        if(distanceInMeters <= 500000000) {
+          print('Location verified');
           print('Distance: $distanceInMeters');
+          print(subject['name']);
           // await Subject.editSubject(
           //   context,
           //   subject['id'],
@@ -36,14 +41,4 @@ markAttendance() async{
       }
     }
   }
-}
-
-LatLng parseLatLng(String coordinatesString) {
-  String cleanedString = coordinatesString.replaceAll('(', '').replaceAll(')', '');
-  List<String> parts = cleanedString.split(', ');
-
-  double latitude = double.parse(parts[0]);
-  double longitude = double.parse(parts[1]);
-
-  return LatLng(latitude, longitude);
 }

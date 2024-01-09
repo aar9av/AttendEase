@@ -67,7 +67,7 @@ class _EditSubject2State extends State<EditSubject2> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Edit New Subject')),
+        title: const Text('Edit New Subject'),
       ),
       body: Stack(
         children: [

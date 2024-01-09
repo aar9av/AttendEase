@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../Functionalities/CloudStore/Subject.dart';
 import '../Dashboard/DashBoardScreen.dart';
 import '../Start & UI/Background.dart';
 import '../../Functionalities/Google Map API/Location Picker.dart';
+import '../Start & UI/LoadingPage.dart';
 import 'EditSubject2.dart';
 
 
@@ -20,7 +23,7 @@ class _EditSubject1State extends State<EditSubject1> {
   TextEditingController subjectCode = TextEditingController();
   TextEditingController subjectCoordinator = TextEditingController();
   double minAttendancePercent = 75;
-  TextEditingController subjectLocation = TextEditingController();
+  LatLng subjectLocation = const LatLng(23.2152, 77.4099);
   bool validateSubjectName = true;
 
   @override
@@ -39,20 +42,20 @@ class _EditSubject1State extends State<EditSubject1> {
         subjectCode.text = subjectData['code'] ?? '';
         subjectCoordinator.text = subjectData['coordinator'] ?? '';
         minAttendancePercent = (subjectData['minAttendancePercentage'] ?? 75).toDouble();
-        subjectLocation.text = subjectData['location'] ?? '';
+        subjectLocation = LatLng(subjectData['location'].latitude, subjectData['location'].longitude);
       });
     } catch (e) {
       print('Error fetching subject data: $e');
-      // Handle the error as needed
     }
   }
 
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return
+      Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Edit New Subject')),
+        title: const Text('Edit New Subject'),
       ),
       body: Stack(
         children: [
@@ -154,7 +157,7 @@ class _EditSubject1State extends State<EditSubject1> {
                         value: minAttendancePercent,
                         min: 0,
                         max: 100,
-                        divisions: 100,
+                        divisions: 20,
                         label: minAttendancePercent.round().toString(),
                         onChanged: (double value) {
                           setState(() {
@@ -183,14 +186,15 @@ class _EditSubject1State extends State<EditSubject1> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute<LocationData>(
-                                  builder: (context) => LocationPicker(),
+                                MaterialPageRoute(
+                                  builder: (context) => LocationPicker(
+                                    subjectLocation: subjectLocation,
+                                  ),
                                 ),
                               ).then((selectedLocation) {
-                                // Handle the selected location (if needed)
                                 if (selectedLocation != null) {
                                   setState(() {
-                                    subjectLocation.text = "(${selectedLocation.latitude}, ${selectedLocation.longitude})";
+                                    subjectLocation = selectedLocation;
                                   });
                                 }
                               });
@@ -227,7 +231,6 @@ class _EditSubject1State extends State<EditSubject1> {
                               validateSubjectName = subjectName.text.isNotEmpty;
                             });
                             if(validateSubjectName) {
-                              // Navigate to the next screen (AddSubject2)
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -240,7 +243,7 @@ class _EditSubject1State extends State<EditSubject1> {
                                             .text,
                                         minAttendancePercent: minAttendancePercent
                                             .toInt(),
-                                        subjectLocation: subjectLocation.text,
+                                        subjectLocation: subjectLocation,
                                       ),
                                 ),
                               );
@@ -268,10 +271,7 @@ class _EditSubject1State extends State<EditSubject1> {
                         ),
                         child: TextButton(
                           onPressed: (){
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => const DashBoardScreen())
-                            );
+                            Navigator.pop(context);
                           },
                           child: const Text(
                             'Cancel',

@@ -1,42 +1,37 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'Get Current Location.dart';
 
 class LocationPicker extends StatefulWidget {
+  final LatLng subjectLocation;
+
+  const LocationPicker({
+    Key? key,
+    required this.subjectLocation,
+  }) : super(key: key);
+
   @override
   _LocationPickerState createState() => _LocationPickerState();
 }
 
 class _LocationPickerState extends State<LocationPicker> {
   GoogleMapController? mapController;
-  late LatLng currentLocation = const LatLng(23.2152, 77.4099);
+  late LatLng currentLocation;
+  MapType currentMapType = MapType.normal;
 
   @override
   void initState() {
     super.initState();
-    getLocation();
+    currentLocation = widget.subjectLocation;
   }
 
-  Future<void> getLocation() async {
-    GetLocation getLocationInstance = GetLocation();
-
-    try {
-      Position userLocation = await getLocationInstance.getCurrentLocation();
-      setState(() {
-        currentLocation = LatLng(userLocation.latitude, userLocation.longitude);
-      });
-    } catch (e) {
-      print("Error: $e");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Select Location'),
+      ),
       body: Stack(
         children: [
           GoogleMap(
@@ -53,6 +48,8 @@ class _LocationPickerState extends State<LocationPicker> {
                 currentLocation = position.target;
               });
             },
+            myLocationEnabled: true,
+            mapType: currentMapType, // Set the map type
           ),
           Center(
             child: Container(
@@ -63,25 +60,39 @@ class _LocationPickerState extends State<LocationPicker> {
               ),
             ),
           ),
+          Container(
+            height: 40,
+            width: 40,
+            margin: EdgeInsets.only(
+              top: 60,
+              left: MediaQuery.of(context).size.width - 50,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white.withAlpha(200),
+            ),
+            child: TextButton(
+              onPressed: () {
+                setState(() {
+                  currentMapType = currentMapType == MapType.normal ? MapType.hybrid : MapType.normal;
+                });
+              },
+              child: Icon(
+                Icons.layers,
+                color: Colors.grey.shade600,
+                size: 20,
+              ),
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: Container(
         height: 50,
         width: double.infinity,
-        decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
-        ),
-        child: ElevatedButton(
+        color: Theme.of(context).primaryColor,
+        child: TextButton(
           onPressed: () {
-
-            Navigator.pop(context, LocationData.fromMap({
-              "latitude": currentLocation.latitude,
-              "longitude": currentLocation.longitude,
-            }));
+            Navigator.pop(context, currentLocation);
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
           child: const Text(
             'Save Location',
             style: TextStyle(
@@ -95,29 +106,11 @@ class _LocationPickerState extends State<LocationPicker> {
     );
   }
 
-
   Future<void> _animateToCurrentLocation() async {
     if (mapController != null) {
       await mapController!.animateCamera(
         CameraUpdate.newLatLng(currentLocation),
       );
     }
-  }
-}
-
-class LocationData {
-  final double latitude;
-  final double longitude;
-
-  LocationData({
-    required this.latitude,
-    required this.longitude,
-  });
-
-  factory LocationData.fromMap(Map<String, dynamic> map) {
-    return LocationData(
-      latitude: map['latitude'] ?? 23.2152,
-      longitude: map['longitude'] ?? 77.4099,
-    );
   }
 }

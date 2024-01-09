@@ -10,10 +10,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Workmanager().initialize(callbackDispatcher);
+  String task = DateTime.now().minute.toString();
   Workmanager().registerPeriodicTask(
-    'Attendance',
+    task,
     'markAttendance',
-    initialDelay: const Duration(seconds: 5),
+    initialDelay: const Duration(seconds: 2),
     frequency: const Duration(minutes: 30),
   );
   runApp(AttendEase());

@@ -13,7 +13,7 @@ class DashBoardScreen extends StatefulWidget {
 }
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
-  late UserData userData; // Variable to store user data
+  late UserData userData;
   bool isLoading = true;
 
   @override
@@ -57,7 +57,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       body: const SubjectsListview(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushReplacement(
+          Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const AddSubject1())
           );

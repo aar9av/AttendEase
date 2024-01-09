@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../Add and Edit Subject/EditSubject1.dart';
 import '../Start & UI/Background.dart';
 
 
 class SubjectPanel extends StatefulWidget {
-  const SubjectPanel({super.key});
+  final String subjectId;
+
+  SubjectPanel({Key? key, required this.subjectId}) : super(key: key);
 
   @override
   State<SubjectPanel> createState() => _SubjectPanelState();
@@ -52,7 +55,18 @@ class _SubjectPanelState extends State<SubjectPanel> {
               ),
             ),
           ],
-        )
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => EditSubject1(subjectId: widget.subjectId))
+          );
+        },
+        backgroundColor: Theme.of(context).primaryColor,
+        tooltip: 'Edit Subject',
+        child: const Icon(Icons.edit),
+      ),
     );
   }
 }

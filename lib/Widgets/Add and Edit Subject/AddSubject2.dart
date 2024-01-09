@@ -45,7 +45,7 @@ class _AddSubject2State extends State<AddSubject2> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Add New Subject')),
+        title: const Text('Add New Subject'),
       ),
       body: Stack(
         children: [

@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../Widgets/Add and Edit Subject/AddSubject2.dart';
 import '../../Widgets/Add and Edit Subject/EditSubject2.dart';
 
@@ -14,7 +15,7 @@ class Subject {
       String subjectCode,
       String subjectCoordinator,
       int minAttendancePercentage,
-      String subjectLocation,
+      LatLng subjectLocation,
       List<TimeSlot> timeSlots)
   async {
     String? uid = await fetchUid();
@@ -33,13 +34,16 @@ class Subject {
         };
       }).toList();
 
+      GeoPoint location = GeoPoint(subjectLocation.latitude, subjectLocation.longitude);
+
       await userSubjects.add({
         'name': subjectName,
         'code': subjectCode,
         'coordinator': subjectCoordinator,
         'minAttendancePercentage': minAttendancePercentage,
-        'location': subjectLocation,
+        'location': location,
         'timeSlots': timeSlotsData,
+        'today': false,
       });
     } catch (e) {
       print('Error adding subjects: $e');
@@ -108,7 +112,7 @@ class Subject {
       String subjectCode,
       String subjectCoordinator,
       int minAttendancePercentage,
-      String subjectLocation,
+      LatLng subjectLocation,
       List<NewTimeSlot> timeSlots,
       ) async {
     try {
@@ -128,13 +132,14 @@ class Subject {
           };
         }).toList();
 
-        // Modify the document instead of adding a new one
+        GeoPoint location = GeoPoint(subjectLocation.latitude, subjectLocation.longitude);
+
         await userSubjects.doc(subjectId).update({
           'name': subjectName,
           'code': subjectCode,
           'coordinator': subjectCoordinator,
           'minAttendancePercentage': minAttendancePercentage,
-          'location': subjectLocation,
+          'location': location,
           'timeSlots': timeSlotsData,
         });
       }

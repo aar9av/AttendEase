@@ -2,7 +2,6 @@
 
 import 'package:attend_easy/Functionalities/CloudStore/Subject.dart';
 import 'package:flutter/material.dart';
-import '../Add and Edit Subject/EditSubject1.dart';
 import 'DashBoardScreen.dart';
 import '../Start & UI/Background.dart';
 import 'SubjectPanel.dart';
@@ -49,34 +48,9 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                         color: Colors.red.withOpacity(0.75),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.all(20.0),
-                        child: const Icon(
-                          Icons.delete_rounded,
-                          color: Colors.white,
-                          size: 60,
-                        ),
-                      ),
-                    ),
-                    secondaryBackground: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.green.withOpacity(0.75),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Container(
-                        alignment: Alignment.centerRight,
-                        padding:const  EdgeInsets.all(20.0),
-                        child: const Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 60,
-                        ),
-                      ),
                     ),
                     key: ValueKey<String>(subjects[index]['id']?.toString() ?? ''),
                     onDismissed: (direction){
-                      if(direction == DismissDirection.startToEnd){
                         showDialog<int>(
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
@@ -119,14 +93,6 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                             ],
                           ),
                         );
-                      } else{
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditSubject1(subjectId: subjects[index]['id'].toString())
-                          ),
-                        );
-                      }
                     },
                     child: Card(
                       elevation: 5,
@@ -149,7 +115,7 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                           onPressed: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const SubjectPanel()),
+                              MaterialPageRoute(builder: (context) => SubjectPanel(subjectId: subjects[index]['id'].toString())),
                             );
                           },
                           child: ListTile(
