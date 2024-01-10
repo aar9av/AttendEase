@@ -1,6 +1,8 @@
 import 'package:attend_easy/Functionalities/Authentication/SignOut.dart';
+import 'package:attend_easy/Widgets/Side%20Panel/ContactUs.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/Users.dart';
+import '../Side Panel/Share.dart';
 import '../Start & UI/Background.dart';
 import '../Side Panel/Profile.dart';
 import '../Side Panel/Settings.dart';
@@ -170,7 +172,10 @@ class _SideDrawerState extends State<SideDrawer> {
                           ),
                           TextButton(
                             onPressed: (){
-                      
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const ContactUs())
+                              );
                             },
                             child: const Row(
                               children: [
@@ -192,7 +197,10 @@ class _SideDrawerState extends State<SideDrawer> {
                           ),
                           TextButton(
                             onPressed: (){
-                      
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const Share())
+                              );
                             },
                             child: const Row(
                               children: [

@@ -6,8 +6,13 @@ import '../Start & UI/Background.dart';
 
 class SubjectPanel extends StatefulWidget {
   final String subjectId;
+  final String name;
 
-  SubjectPanel({Key? key, required this.subjectId}) : super(key: key);
+  SubjectPanel({
+    Key? key,
+    required this.subjectId,
+    required this.name,
+  }) : super(key: key);
 
   @override
   State<SubjectPanel> createState() => _SubjectPanelState();
@@ -20,7 +25,7 @@ class _SubjectPanelState extends State<SubjectPanel> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Subject'),
+          title: Text(widget.name),
         ),
         body: Stack(
           children : [

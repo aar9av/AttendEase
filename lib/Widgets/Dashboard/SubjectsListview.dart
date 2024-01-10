@@ -45,6 +45,14 @@ class _SubjectsListviewState extends State<SubjectsListview> {
     });
   }
 
+  Color getColor(int percentage, int requiredPercentage) {
+    if(percentage<requiredPercentage){
+      return Colors.red.shade300;
+    } else {
+      return Colors.green.shade700;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +118,8 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                         );
                     },
                     child: Card(
-                      elevation: 5,
+                      elevation: 7,
+                      shadowColor: getColor(percentage[index], subjects[index]['minAttendancePercentage']),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -130,7 +139,12 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                           onPressed: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => SubjectPanel(subjectId: subjects[index]['id'].toString())),
+                              MaterialPageRoute(builder: (context) =>
+                                  SubjectPanel(
+                                      subjectId: subjects[index]['id'].toString(),
+                                      name: subjects[index]['name'],
+                                  ),
+                              ),
                             );
                           },
                           child: ListTile(
@@ -138,27 +152,27 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                             leading: Icon(
                               Icons.book,
                               size: 40,
-                              color: Colors.black.withAlpha(150),
+                              color: Colors.grey.shade700,
                             ),
                             title: Text(
                               subjects[index]['name'] ?? '',
                               style: TextStyle(
-                                color: Colors.black.withAlpha(200),
+                                color: Colors.grey.shade700,
                                 fontSize: 22,
                               ),
                             ),
                             subtitle: Text(
                               subjects[index]['coordinator'] ?? '',
                               style: TextStyle(
-                                color: Colors.black.withAlpha(200),
+                                color: Colors.grey.shade700,
                                 fontSize: 14,
                               ),
                             ),
                             trailing: Text(
                               '${percentage[index]}%',
                               style: TextStyle(
-                                color: Colors.black.withAlpha(150),
-                                fontSize: 26,
+                                color: getColor(percentage[index], subjects[index]['minAttendancePercentage']),
+                                fontSize: 30,
                               ),
                             ),
                           ),
