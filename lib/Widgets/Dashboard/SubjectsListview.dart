@@ -2,6 +2,7 @@
 
 import 'package:attend_easy/Functionalities/CloudStore/Subject.dart';
 import 'package:flutter/material.dart';
+import '../../Functionalities/CloudStore/Attendance.dart';
 import 'DashBoardScreen.dart';
 import '../Start & UI/Background.dart';
 import 'SubjectPanel.dart';
@@ -16,6 +17,7 @@ class SubjectsListview extends StatefulWidget {
 
 class _SubjectsListviewState extends State<SubjectsListview> {
   late List<Map<String, dynamic>> subjects = [];
+  late List<int> percentage = [];
 
   @override
   void initState() {
@@ -25,8 +27,21 @@ class _SubjectsListviewState extends State<SubjectsListview> {
 
   Future<void> _fetchSubjects() async {
     List<Map<String, dynamic>> fetchedSubjects = await Subject.fetchAllSubjects();
+    List<int> calculatedPercentage = [];
+
+    fetchedSubjects.sort((a, b) => (a['code'] ?? '').compareTo(b['code'] ?? ''));
+
+    for(var subject in fetchedSubjects){
+      var attendanceData = await Attendance.fetchAttendance(subject['id']);
+      int presentCount = attendanceData.where((attendance) => attendance['status'] == 'Present').length;
+      int absentCount = attendanceData.where((attendance) => attendance['status'] == 'Absent').length;
+      (presentCount+absentCount == 0) ?
+      calculatedPercentage.insert(calculatedPercentage.length, 0):
+      calculatedPercentage.insert(calculatedPercentage.length, (presentCount/(presentCount+absentCount)*100).toInt());
+    }
     setState(() {
       subjects = fetchedSubjects;
+      percentage = calculatedPercentage;
     });
   }
 
@@ -140,7 +155,7 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                               ),
                             ),
                             trailing: Text(
-                              '${subjects[index]['minAttendancePercentage']}%',
+                              '${percentage[index]}%',
                               style: TextStyle(
                                 color: Colors.black.withAlpha(150),
                                 fontSize: 26,

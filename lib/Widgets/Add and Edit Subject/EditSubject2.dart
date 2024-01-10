@@ -67,7 +67,7 @@ class _EditSubject2State extends State<EditSubject2> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit New Subject'),
+        title: const Text('Edit Subject'),
       ),
       body: Stack(
         children: [
@@ -208,7 +208,7 @@ class _EditSubject2State extends State<EditSubject2> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Container(
                         width: double.infinity,

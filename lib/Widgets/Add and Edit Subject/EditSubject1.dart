@@ -4,7 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../Functionalities/CloudStore/Subject.dart';
 import '../Dashboard/DashBoardScreen.dart';
 import '../Start & UI/Background.dart';
-import '../../Functionalities/Google Map API/Location Picker.dart';
+import '../../Functionalities/Map & Attendance/Location Picker.dart';
 import '../Start & UI/LoadingPage.dart';
 import 'EditSubject2.dart';
 
@@ -55,7 +55,7 @@ class _EditSubject1State extends State<EditSubject1> {
     return
       Scaffold(
       appBar: AppBar(
-        title: const Text('Edit New Subject'),
+        title: const Text('Edit Subject'),
       ),
       body: Stack(
         children: [

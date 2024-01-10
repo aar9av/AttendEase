@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-
 import '../Add and Edit Subject/EditSubject1.dart';
 import '../Start & UI/Background.dart';
 
@@ -21,7 +20,7 @@ class _SubjectPanelState extends State<SubjectPanel> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Center(child: Text('Subject')),
+          title: const Text('Subject'),
         ),
         body: Stack(
           children : [

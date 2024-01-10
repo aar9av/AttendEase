@@ -185,7 +185,7 @@ class _AddSubject2State extends State<AddSubject2> {
                         ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       Container(
                         width: double.infinity,

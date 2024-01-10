@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
+
 
 class LocationPicker extends StatefulWidget {
   final LatLng subjectLocation;
@@ -17,18 +19,30 @@ class _LocationPickerState extends State<LocationPicker> {
   GoogleMapController? mapController;
   late LatLng currentLocation;
   MapType currentMapType = MapType.normal;
+  Location location = Location();
 
   @override
   void initState() {
     super.initState();
     currentLocation = widget.subjectLocation;
+    checkLocationStatus();
   }
 
+  Future<void> checkLocationStatus() async{
+    bool isLocationEnabled = await location.serviceEnabled();
+    if(!isLocationEnabled){
+      isLocationEnabled = await location.requestService();
+      if(!isLocationEnabled){
+        return;
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return
+      Scaffold(
       appBar: AppBar(
         title: const Text('Select Location'),
       ),

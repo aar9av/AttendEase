@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../../Functionalities/Google Map API/Location Picker.dart';
+import '../../Functionalities/Map & Attendance/Location Picker.dart';
 import '../Dashboard/DashBoardScreen.dart';
 import 'AddSubject2.dart';
 import '../Start & UI/Background.dart';

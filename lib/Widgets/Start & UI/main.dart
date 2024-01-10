@@ -2,18 +2,24 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:workmanager/workmanager.dart';
-import '../../Functionalities/Attendance/MarkAttendance.dart';
+import '../../Functionalities/Map & Attendance/MarkAttendance.dart';
 import '../Dashboard/DashBoardScreen.dart';
 import '../Login and Signup/LoginScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Workmanager().initialize(callbackDispatcher);
+  Workmanager().initialize(
+    callbackDispatcher,
+    // --------------------Remove this line after debug
+    isInDebugMode: true,
+  );
+  // --------------------Make Task name constant
   String task = DateTime.now().minute.toString();
   Workmanager().registerPeriodicTask(
     task,
     'markAttendance',
+    // --------------------Remove this line after debug
     initialDelay: const Duration(seconds: 2),
     frequency: const Duration(minutes: 30),
   );
