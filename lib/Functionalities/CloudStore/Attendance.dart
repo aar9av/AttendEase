@@ -58,15 +58,15 @@ class Attendance {
   static Future<List<Map<String, dynamic>>> fetchAttendance(String subjectID) async {
     String? uid = await Users.fetchUid();
 
-    CollectionReference subjectAttendance = FirebaseFirestore.instance
-        .collection('users/$uid/subjects/$subjectID/attendance');
+    CollectionReference attendanceCollection = FirebaseFirestore.instance
+        .collection('/users/$uid/subjects/$subjectID/attendance');
 
-    QuerySnapshot<Object?> snapshot = await subjectAttendance.get();
+    QuerySnapshot<Object?> snapshot = await attendanceCollection.get();
 
-    return List<Map<String, dynamic>>.from(snapshot.docs.map((doc) {
+    return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-      data['id'] = doc.id; // Include the document ID in the data
+      data['id'] = doc.id;
       return data;
-    }).toList());
+    }).toList();
   }
 }

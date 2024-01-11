@@ -1,3 +1,4 @@
+import 'package:attend_easy/Functionalities/CloudStore/Attendance.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../Add and Edit Subject/EditSubject1.dart';
@@ -20,10 +21,34 @@ class SubjectPanel extends StatefulWidget {
 
 class _SubjectPanelState extends State<SubjectPanel> {
   DateTime today = DateTime.now();
+  late List<Map<String, dynamic>> attendance = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchAttendance();
+  }
+
+  Future<void> _fetchAttendance() async {
+    print(widget.name);
+    List<Map<String, dynamic>> fetchedAttendance = await Attendance.fetchAttendance(widget.subjectId);
+    setState(() {
+      attendance = fetchedAttendance;
+      isLoading = false;
+    });
+    setState(() {
+      for(int i=0; i<attendance.length; i++){
+        attendance[i]['dateTime'] = attendance[i]['dateTime'].toDate();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+    return
+      Scaffold(
         appBar: AppBar(
           title: Text(widget.name),
         ),

@@ -99,7 +99,6 @@ class Users {
 
       if (user != null) {
         await user.delete();
-        print('User deleted successfully.');
       } else {
         print('No user is currently signed in.');
       }

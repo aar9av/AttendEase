@@ -9,6 +9,13 @@ markAttendance() async{
   var hour = DateTime.now().hour;
 
   for(var subject in subjects){
+    if(subject['timeSlots'][day]['time']['hour'] == hour + 1) {
+      bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
+      if(!isLocationEnabled){
+        // ----------------------------- Send Notification
+      }
+    }
+
     if(subject['timeSlots'][day]['isChecked']){
       if(subject['timeSlots'][day]['time']['hour'] == hour){
         bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
@@ -39,6 +46,7 @@ markAttendance() async{
               entryDate.day == DateTime.now().day;
         });
         if(!isTodayEntryExist) {
+
           if (subject['today']) {
             await Attendance.addAttendanceDocument(subject['id'], 'Present');
             // ----------------------------- Send Notification
@@ -46,6 +54,7 @@ markAttendance() async{
             await Attendance.addAttendanceDocument(subject['id'], 'Absent');
             // ----------------------------- Send Notification
           }
+
         }
         Attendance.resetAttendanceStatus(subject['id']);
       }
