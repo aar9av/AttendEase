@@ -9,19 +9,12 @@ import '../Login and Signup/LoginScreen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  Workmanager().initialize(
-    callbackDispatcher,
-    // --------------------Remove this line after debug
-    isInDebugMode: true,
-  );
-  // --------------------Make Task name constant
-  String task = DateTime.now().minute.toString();
+  Workmanager().initialize(callbackDispatcher);
+  String task = 'Attendance';
   Workmanager().registerPeriodicTask(
     task,
     'markAttendance',
-    // --------------------Remove this line after debug
-    initialDelay: const Duration(seconds: 2),
-    frequency: const Duration(minutes: 30),
+    frequency: const Duration(minutes: 20),
   );
   runApp(AttendEase());
 }

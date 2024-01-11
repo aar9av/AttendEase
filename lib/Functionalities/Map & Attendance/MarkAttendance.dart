@@ -48,10 +48,10 @@ markAttendance() async{
         if(!isTodayEntryExist) {
 
           if (subject['today']) {
-            await Attendance.addAttendanceDocument(subject['id'], 'Present');
+            await Attendance.addAttendanceDocument(subject['id'], 'Present', DateTime.now());
             // ----------------------------- Send Notification
           } else {
-            await Attendance.addAttendanceDocument(subject['id'], 'Absent');
+            await Attendance.addAttendanceDocument(subject['id'], 'Absent', DateTime.now());
             // ----------------------------- Send Notification
           }
 

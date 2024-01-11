@@ -1,8 +1,10 @@
+
 import 'package:attend_easy/Functionalities/CloudStore/Attendance.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '../Add and Edit Subject/EditSubject1.dart';
 import '../Start & UI/Background.dart';
+import '../../Functionalities/Map & Attendance/TakeAttendanceManually.dart';
 
 
 class SubjectPanel extends StatefulWidget {
@@ -21,7 +23,8 @@ class SubjectPanel extends StatefulWidget {
 
 class _SubjectPanelState extends State<SubjectPanel> {
   DateTime today = DateTime.now();
-  late List<Map<String, dynamic>> attendance = [];
+  late List<DateTime> dates = [];
+  late List<String> status = [];
   bool isLoading = true;
 
   @override
@@ -31,16 +34,13 @@ class _SubjectPanelState extends State<SubjectPanel> {
   }
 
   Future<void> _fetchAttendance() async {
-    print(widget.name);
     List<Map<String, dynamic>> fetchedAttendance = await Attendance.fetchAttendance(widget.subjectId);
     setState(() {
-      attendance = fetchedAttendance;
-      isLoading = false;
-    });
-    setState(() {
-      for(int i=0; i<attendance.length; i++){
-        attendance[i]['dateTime'] = attendance[i]['dateTime'].toDate();
+      for(int i=0; i<fetchedAttendance.length; i++){
+        dates.add(fetchedAttendance[i]['dateTime'].toDate());
+        status.add(fetchedAttendance[i]['status']);
       }
+      isLoading = false;
     });
   }
 
@@ -79,6 +79,45 @@ class _SubjectPanelState extends State<SubjectPanel> {
                     focusedDay: today,
                     firstDay: DateTime.utc(2000,1,1),
                     lastDay: DateTime.utc(2100,12,31),
+                    startingDayOfWeek: StartingDayOfWeek.monday,
+                    calendarBuilders: CalendarBuilders(
+                        defaultBuilder: (context, date, events) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>
+                                    TakeAttendanceManually(
+                                        subjectId: widget.subjectId,
+                                        date: date
+                                    )
+                                ),
+                              );
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: isCustomDate(date) == 'Present'
+                                    ? Colors.green.shade200
+                                    : isCustomDate(date) == 'Absent'
+                                    ? Colors.red.shade200
+                                    : null,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  '${date.day}',
+                                  style: TextStyle(
+                                    color: isCustomDate(date) == 'Present' || isCustomDate(date) == 'Absent'
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                    ),
                   ),
                 ),
               ),
@@ -98,4 +137,14 @@ class _SubjectPanelState extends State<SubjectPanel> {
       ),
     );
   }
+
+  String isCustomDate(DateTime date) {
+    for(int i=0; i<dates.length; i++) {
+      if(dates[i].year == date.year && dates[i].month == date.month && dates[i].day == date.day) {
+        return status[i];
+      }
+    }
+    return '';
+  }
+
 }

@@ -37,17 +37,15 @@ class Attendance {
     }
   }
 
-  static addAttendanceDocument(String subjectId, String status) async {
+  static addAttendanceDocument(String subjectId, String status, DateTime date) async {
     try {
       String? uid = await Users.fetchUid();
 
       CollectionReference attendanceCollection = FirebaseFirestore.instance
           .collection('users/$uid/subjects/$subjectId/attendance');
 
-      DateTime now = DateTime.now();
-
       await attendanceCollection.add({
-        'dateTime': Timestamp.fromDate(now),
+        'dateTime': Timestamp.fromDate(date),
         'status': status,
       });
     } catch (e) {
@@ -68,5 +66,21 @@ class Attendance {
       data['id'] = doc.id;
       return data;
     }).toList();
+  }
+
+  static updateAttendanceDocument(String subjectId, String attendanceId, DateTime date, String status) async {
+    try {
+      String? uid = await Users.fetchUid();
+
+      CollectionReference attendanceCollection = FirebaseFirestore.instance
+          .collection('users/$uid/subjects/$subjectId/attendance');
+
+      await attendanceCollection.doc(attendanceId).update({
+        'dateTime': Timestamp.fromDate(date),
+        'status': status,
+      });
+    } catch (e) {
+      print('Error in adding attendance document: $e');
+    }
   }
 }
