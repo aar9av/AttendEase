@@ -50,40 +50,42 @@ class Share extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      Row(
-                        children: [
-                          Icon (
-                            Icons.android,
-                            size: 40,
-                            color: Theme.of(context).primaryColor,
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Image.asset(
+                          'Assets/Images/Android.png',
+                          height: 75,
+                        ),
+                        title: const Text(
+                          'APK File',
+                          style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.lightGreen
                           ),
-                          Text(
-                            '  APK File',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
+                        ),
+                        subtitle: const Text(
+                            'https://github.com/aar9av/AttendEase-APKFile'
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      const Divider(
+                        color: Colors.grey,
                       ),
-                      Row(
-                        children: [
-                          Icon (
-                            Icons.ad_units_rounded,
-                            size: 40,
-                            color: Theme.of(context).primaryColor,
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Image.asset(
+                          'Assets/Images/GitHub.png',
+                          height: 75,
+                        ),
+                        title: const Text(
+                          'Source Code',
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.black,
                           ),
-                          Text(
-                            '  https://github.com/aar9av/AttendEase',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
+                        ),
+                        subtitle: const Text(
+                            'https://github.com/aar9av/AttendEase'
+                        ),
                       ),
                       const SizedBox(
                         height: 30,

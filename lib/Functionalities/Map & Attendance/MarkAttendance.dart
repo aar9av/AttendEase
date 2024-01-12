@@ -46,7 +46,6 @@ markAttendance() async{
               entryDate.day == DateTime.now().day;
         });
         if(!isTodayEntryExist) {
-
           if (subject['today']) {
             await Attendance.addAttendanceDocument(subject['id'], 'Present', DateTime.now());
             // ----------------------------- Send Notification
@@ -54,7 +53,6 @@ markAttendance() async{
             await Attendance.addAttendanceDocument(subject['id'], 'Absent', DateTime.now());
             // ----------------------------- Send Notification
           }
-
         }
         Attendance.resetAttendanceStatus(subject['id']);
       }

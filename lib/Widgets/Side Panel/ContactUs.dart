@@ -50,59 +50,62 @@ class ContactUs extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      Row(
-                        children: [
-                          Icon (
-                            Icons.mail,
-                            size: 40,
-                            color: Theme.of(context).primaryColor,
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Image.asset(
+                          'Assets/Images/Mail.png',
+                          height: 75,
+                        ),
+                        title: const Text(
+                          'Email',
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.redAccent
                           ),
-                          Text(
-                            '  arnavgupta.mca@gmail.com',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
+                        ),
+                        subtitle: const Text(
+                          'aar9av@gmail.com'
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      const Divider(
+                        color: Colors.grey,
                       ),
-                      Row(
-                        children: [
-                          Icon (
-                            Icons.account_box_rounded,
-                            size: 40,
-                            color: Theme.of(context).primaryColor,
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Image.asset(
+                          'Assets/Images/Linkedin.png',
+                          height: 75,
+                        ),
+                        title: const Text(
+                          'LinkedIn',
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.blue,
                           ),
-                          Text(
-                            '  https://www.linkedin.com/in/aar9av/',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
+                        ),
+                        subtitle: const Text(
+                            'https://www.linkedin.com/in/aar9av/'
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      const Divider(
+                        color: Colors.grey,
                       ),
-                      Row(
-                        children: [
-                          Icon (
-                            Icons.ad_units_rounded,
-                            size: 40,
-                            color: Theme.of(context).primaryColor,
+                      ListTile(
+                        contentPadding: EdgeInsets.zero,
+                        leading: Image.asset(
+                          'Assets/Images/GitHub.png',
+                          height: 75,
+                        ),
+                        title: const Text(
+                          'GitHub',
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.black,
                           ),
-                          Text(
-                            '  https://github.com/aar9av',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
+                        ),
+                        subtitle: const Text(
+                            'https://github.com/aar9av'
+                        ),
                       ),
                       const SizedBox(
                         height: 30,
