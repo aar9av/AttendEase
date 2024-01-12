@@ -170,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: (){
                             LoginWithGoogle().loginWithGoogle(context);
                           },
-                          icon: Image.asset("Assets/Images/Google.jpg"),
+                          icon: Image.asset("Assets/Google.jpg"),
                         ),
                       ),
                     ],

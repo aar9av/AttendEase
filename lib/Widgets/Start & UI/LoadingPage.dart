@@ -29,7 +29,7 @@ class LoadingPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'Assets/Images/Logo.png',
+                  'Assets/Logo.png',
                   width: 100,
                   height: 100,
                 ),

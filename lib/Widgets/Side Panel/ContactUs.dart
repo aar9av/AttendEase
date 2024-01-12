@@ -53,7 +53,7 @@ class ContactUs extends StatelessWidget {
                       ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: Image.asset(
-                          'Assets/Images/Mail.png',
+                          'Assets/Mail.png',
                           height: 75,
                         ),
                         title: const Text(
@@ -73,7 +73,7 @@ class ContactUs extends StatelessWidget {
                       ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: Image.asset(
-                          'Assets/Images/Linkedin.png',
+                          'Assets/Linkedin.png',
                           height: 75,
                         ),
                         title: const Text(
@@ -93,7 +93,7 @@ class ContactUs extends StatelessWidget {
                       ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: Image.asset(
-                          'Assets/Images/GitHub.png',
+                          'Assets/GitHub.png',
                           height: 75,
                         ),
                         title: const Text(

@@ -53,7 +53,7 @@ class Share extends StatelessWidget {
                       ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: Image.asset(
-                          'Assets/Images/Android.png',
+                          'Assets/Android.png',
                           height: 75,
                         ),
                         title: const Text(
@@ -73,7 +73,7 @@ class Share extends StatelessWidget {
                       ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: Image.asset(
-                          'Assets/Images/GitHub.png',
+                          'Assets/GitHub.png',
                           height: 75,
                         ),
                         title: const Text(

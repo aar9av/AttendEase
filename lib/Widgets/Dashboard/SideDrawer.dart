@@ -62,7 +62,7 @@ class _SideDrawerState extends State<SideDrawer> {
                     children: [
                       const CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage("Assets/Images/Profile.png"),
+                        backgroundImage: AssetImage("Assets/Profile.png"),
                       ),
                       Text(
                         userData.name,

@@ -69,7 +69,7 @@ class _LocationPickerState extends State<LocationPicker> {
             child: Container(
               padding: const EdgeInsets.only(bottom: 50),
               child: Image.asset(
-                'Assets/Images/LocationMarker.png',
+                'Assets/LocationMarker.png',
                 height: 100,
               ),
             ),
