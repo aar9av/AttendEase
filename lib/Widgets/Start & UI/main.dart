@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:workmanager/workmanager.dart';
 import '../../Functionalities/Map & Attendance/MarkAttendance.dart';
 import '../Dashboard/DashBoardScreen.dart';
-import '../Login and Signup/LoginScreen.dart';
+import 'LoginScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ void main() async {
 }
 
 class AttendEase extends StatelessWidget {
-  AttendEase({super.key});
+  const AttendEase({super.key});
 
   @override
   Widget build(BuildContext context) {

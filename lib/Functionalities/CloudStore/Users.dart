@@ -7,14 +7,12 @@ import 'package:flutter/material.dart';
 class UserData {
   final String name;
   final String email;
-  final String password;
   final String college;
   final String course;
 
   UserData({
     required this.name,
     required this.email,
-    required this.password,
     required this.college,
     required this.course,
   });
@@ -24,7 +22,6 @@ class UserData {
     return UserData(
       name: data['name'],
       email: data['email'],
-      password: data['password'],
       college: data['college'],
       course: data['course'],
     );
@@ -55,7 +52,6 @@ class Users {
       String name,
       String college,
       String course,
-      String password,
       ) async {
     try {
       String? uid = await fetchUid();
@@ -68,7 +64,6 @@ class Users {
           'name': name,
           'college': college,
           'course': course,
-          'password': password,
         });
       }
     } catch (e) {

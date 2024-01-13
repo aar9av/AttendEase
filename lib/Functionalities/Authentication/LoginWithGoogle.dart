@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -23,14 +25,11 @@ class LoginWithGoogle {
       UserCredential userCredential = await _auth.signInWithCredential(credentials);
 
       if (userCredential.additionalUserInfo!.isNewUser) {
-        // Create a user document in the 'users' collection
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
           'name': userCredential.user!.displayName,
           'email': userCredential.user!.email,
-          'password': 'GoogleSignIN',
           'college': '',
           'course': '',
-          // Add other user details as needed
         });
       }
 
@@ -41,7 +40,6 @@ class LoginWithGoogle {
 
       return userCredential;
     } catch (error) {
-      print('Error during Google sign-in: $error');
       return null;
     }
   }

@@ -225,7 +225,7 @@ class _SideDrawerState extends State<SideDrawer> {
                           ),
                           TextButton(
                             onPressed: () async{
-                              SignOut().signOutEmail(context);
+                              SignOut().signOutPhone(context);
                               SignOut().signOutGoogle(context);
                             },
                             child: const Row(

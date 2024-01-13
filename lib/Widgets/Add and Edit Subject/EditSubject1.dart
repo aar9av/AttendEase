@@ -1,11 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../Functionalities/CloudStore/Subject.dart';
-import '../Dashboard/DashBoardScreen.dart';
 import '../Start & UI/Background.dart';
 import '../../Functionalities/Map & Attendance/Location Picker.dart';
-import '../Start & UI/LoadingPage.dart';
 import 'EditSubject2.dart';
 
 

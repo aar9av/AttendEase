@@ -20,12 +20,9 @@ class _ProfileState extends State<Profile> {
   TextEditingController email = TextEditingController();
   TextEditingController college = TextEditingController();
   TextEditingController course = TextEditingController();
-  TextEditingController password = TextEditingController();
   String? preEmail;
   bool validateName = true;
   bool validateEmail = true;
-  bool validatePassword = true;
-  bool passwordVisible = true;
 
   @override
   void initState() {
@@ -41,7 +38,6 @@ class _ProfileState extends State<Profile> {
         email.text = widget.userData.email;
         college.text = widget.userData.college;
         course.text = widget.userData.course;
-        password.text = widget.userData.password;
         preEmail = email.text;
       });
     } catch (e) {
@@ -112,14 +108,15 @@ class _ProfileState extends State<Profile> {
                         height: 10,
                       ),
                       TextField(
-                        keyboardType: TextInputType.emailAddress,
                         controller: email,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.email),
+                          prefixIcon: preEmail!.contains('@')
+                              ? const Icon(Icons.mail)
+                              : const Icon(Icons.phone),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50)
                           ),
-                          labelText: 'Email',
+                          labelText: 'Email/Phone Number',
                           errorText: validateEmail ? null : "Email can't be changed!",
                         ),
                       ),
@@ -164,43 +161,6 @@ class _ProfileState extends State<Profile> {
                           labelText: 'Course',
                         ),
                       ),
-                      const Divider(
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          'Change Password',
-                          style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontSize: 24,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        keyboardType: TextInputType.text,
-                        controller: password,
-                        obscureText: passwordVisible,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.key),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50)
-                          ),
-                          labelText: 'Password',
-                          errorText: validatePassword ? null : "Password must contain at least 8 characters",
-                          suffixIcon: IconButton(
-                            icon: Icon(passwordVisible ? Icons.visibility : Icons.visibility_off),
-                            onPressed: () {
-                              setState(() {
-                                passwordVisible = !passwordVisible;
-                              },);
-                            },
-                          ),
-                        ),
-                      ),
                       const SizedBox(
                         height: 20,
                       ),
@@ -216,15 +176,13 @@ class _ProfileState extends State<Profile> {
                             setState(() {
                               validateName = name.text.isNotEmpty;
                               validateEmail = email.text == preEmail;
-                              validatePassword = password.text.length>=8;
                             });
-                            if(validateName && validateEmail && validatePassword) {
+                            if(validateName && validateEmail) {
                               Users.editUser(
                                 context,
                                 name.text,
                                 college.text,
                                 course.text,
-                                password.text,
                               );
                               Navigator.pop(context);
                               Navigator.pushReplacement(

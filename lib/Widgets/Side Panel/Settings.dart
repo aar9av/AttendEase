@@ -1,5 +1,5 @@
 import 'package:attend_easy/Widgets/Start%20&%20UI/Background.dart';
-import 'package:attend_easy/Widgets/Login%20and%20Signup/LoginScreen.dart';
+import 'package:attend_easy/Widgets/Start%20&%20UI/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import '../../Functionalities/CloudStore/Users.dart';
 
