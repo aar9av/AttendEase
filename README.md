@@ -1,16 +1,17 @@
-# attend_easy
+AttendEase: 
+This automated attendance tracking app is a game-changer for students aiming to hit their college attendance targets effortlessly. Let me give you a sneak peek into this fantastic journey! AttendEase is your go-to solution for simplified attendance tracking. With its live location tracking system, students can effortlessly monitor and achieve their subject-wise attendance goals, all in one convenient place. No more hassle – just seamless attendance management!
 
-A new Flutter project.
+Key Features:
+- Automated attendance tracking
+- Live location tracking for accuracy
+- Subject-wise attendance summary
+- Effortless and user-friendly interface
+- Google Authentication
 
-## Getting Started
+Tech Stack:
+- Flutter
+- Dart
+- Firebase
+- Google Map API
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+APK File: https://shorturl.at/dikD0
