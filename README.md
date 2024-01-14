@@ -14,5 +14,5 @@ Tech Stack:
 - Firebase
 - Google Map API
 
-APK File: https://shorturl.at/pruLQ
-Demo Presentation: https://shorturl.at/jsXZ6
+APK File: https://shorturl.at/pruLQ ,
+Demo Presentation: https://shorturl.at/doxEF
