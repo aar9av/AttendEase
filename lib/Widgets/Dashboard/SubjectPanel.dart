@@ -1,4 +1,3 @@
-
 import 'package:attend_easy/Functionalities/CloudStore/Attendance.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -82,42 +81,40 @@ class _SubjectPanelState extends State<SubjectPanel> {
                     startingDayOfWeek: StartingDayOfWeek.monday,
                     calendarBuilders: CalendarBuilders(
                         defaultBuilder: (context, date, events) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    TakeAttendanceManually(
-                                        subjectId: widget.subjectId,
-                                        date: date
-                                    )
-                                ),
-                              );
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                color: isCustomDate(date) == 'Present'
-                                    ? Colors.green.shade200
-                                    : isCustomDate(date) == 'Absent'
-                                    ? Colors.red.shade200
-                                    : null,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '${date.day}',
-                                  style: TextStyle(
-                                    color: isCustomDate(date) == 'Present' || isCustomDate(date) == 'Absent'
-                                        ? Colors.white
-                                        : Colors.black,
-                                  ),
+                          return Container(
+                            margin: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: isCustomDate(date) == 'Present'
+                                  ? Colors.green.shade200
+                                  : isCustomDate(date) == 'Absent'
+                                  ? Colors.red.shade200
+                                  : null,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${date.day}',
+                                style: TextStyle(
+                                  color: isCustomDate(date) == 'Present' || isCustomDate(date) == 'Absent'
+                                      ? Colors.white
+                                      : Colors.black,
                                 ),
                               ),
                             ),
                           );
                         },
                     ),
+                    onDaySelected: (selectedDay, focusedDay) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            TakeAttendanceManually(
+                              subjectId: widget.subjectId,
+                              date: selectedDay, // Use selectedDay instead of focusedDay
+                            )
+                        ),
+                      );
+                    },
                   ),
                 ),
               ),
