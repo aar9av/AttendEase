@@ -120,15 +120,15 @@ class _SubjectsListviewState extends State<SubjectsListview> {
                     child: Card(
                       elevation: 8,
                       shadowColor: getColor(percentage[index], subjects[index]['minAttendancePercentage']),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(
-                          color: getColor(percentage[index], subjects[index]['minAttendancePercentage']),
-                        )
-                      ),
+                      // shape: RoundedRectangleBorder(
+                      //   borderRadius: BorderRadius.circular(20),
+                      //   side: BorderSide(
+                      //     color: getColor(percentage[index], subjects[index]['minAttendancePercentage']),
+                      //   )
+                      // ),
                       child: Container(
                         decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
                           gradient: LinearGradient(
                             begin: AlignmentDirectional.topStart,
                             end: AlignmentDirectional.bottomEnd,

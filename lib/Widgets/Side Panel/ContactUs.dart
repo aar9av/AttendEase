@@ -64,7 +64,7 @@ class ContactUs extends StatelessWidget {
                           ),
                         ),
                         subtitle: const Text(
-                          'aar9av@gmail.com'
+                          'arnavgupta.nitb@gmail.com'
                         ),
                       ),
                       const Divider(

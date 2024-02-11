@@ -64,7 +64,7 @@ class Share extends StatelessWidget {
                           ),
                         ),
                         subtitle: const Text(
-                            'https://github.com/aar9av/AttendEase-APKFile'
+                            'https://shorturl.at/dikD0'
                         ),
                       ),
                       const Divider(
